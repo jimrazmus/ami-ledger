@@ -1,48 +1,66 @@
-defaults: &defaults
-  docker:
-    - image: circleci/node:8.10.0-browsers
-  working_directory: ~/ami-ledger
-  steps:
-    - checkout
-    - restore-cache:
-        paths:
-          - node_modules
-          - ~/.cache/yarn
-        key: yarn-packages-{{ checksum "yarn.lock" }}
-    - run:
-        name: Install Dependencies
-        command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
-    - save-cache:
-        paths:
-          - node_modules
-          - ~/.cache/yarn
-        key: yarn-packages-{{ checksum "yarn.lock" }}
-
-version: 2
+version: 2.1
+commands:
+  juggle-cache:
+    description: "Attempt cache restore, yarn install, and cache save"
+    steps:
+      - restore-cache:
+          paths:
+            - node_modules
+            - ~/.cache/yarn
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
+      - save-cache:
+          paths:
+            - node_modules
+            - ~/.cache/yarn
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
 jobs:
   build:
-    <<: *defaults
-    - run:
-        Name: No-op
-        command: yarn --version
+    docker:
+      - image: circleci/node:8.10.0-browser
+    working_directory: ~/ami-ledger
+    steps:
+      - checkout
+      - juggle-cache
+      - run:
+          Name: No-op
+          command: yarn --version
   lint:
-    <<: *defaults
-    - run:
-        Name: Lint
-        command: yarn run lint
+    docker:
+      - image: circleci/node:8.10.0-browser
+    working_directory: ~/ami-ledger
+    steps:
+      - checkout
+      - juggle-cache
+      - run:
+          Name: Lint
+          command: yarn run lint
   prettier:
-    <<: *defaults
-    - run:
-        name: Prettier
-        command: yarn run prettier
+    docker:
+      - image: circleci/node:8.10.0-browser
+    working_directory: ~/ami-ledger
+    steps:
+      - checkout
+      - juggle-cache
+      - run:
+          name: Prettier
+          command: yarn run prettier
   test:
-    <<: *defaults
-    - run:
-        name: Jest testing
-        command: yarn run test
-    - store_test_results:
-        path: ~/reports/junit
-
+    docker:
+      - image: circleci/node:8.10.0-browser
+    working_directory: ~/ami-ledger
+    steps:
+      - checkout
+      - juggle-cache
+      - run:
+          name: Jest testing
+          command: yarn run test
+      - store_test_results:
+          path: ~/reports/junit
 workflows:
   build-lint-test:
     jobs:
@@ -50,6 +68,6 @@ workflows:
       - lint
       - prettier
       - test
-          context: aws-dev
-          requires:
-            - build
+  deploy:
+    jobs:
+      - build
