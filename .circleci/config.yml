@@ -1,0 +1,52 @@
+defaults: &defaults
+  docker:
+    - image: circleci/node:8.10.0-browsers
+  working_directory: ~/ami-ledger
+  steps:
+    - checkout
+    - restore-cache:
+        paths:
+          - node_modules
+          - ~/.cache/yarn
+        key: yarn-packages-{{ checksum "yarn.lock" }}
+    - run:
+        name: Install Dependencies
+        command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
+    - save-cache:
+        paths:
+          - node_modules
+          - ~/.cache/yarn
+        key: yarn-packages-{{ checksum "yarn.lock" }}
+
+version: 2
+jobs:
+  build:
+    <<: *defaults
+  lint:
+    <<: *defaults
+    - run:
+        Name: Lint
+        command: yarn run lint
+  prettier:
+    <<: *defaults
+    - run:
+        name: Prettier
+        command: yarn run prettier
+  test:
+    <<: *defaults
+    - run:
+        name: Jest testing
+        command: yarn run test
+    - store_test_results:
+        path: ~/reports/junit
+
+workflows:
+  build-lint-test:
+    jobs:
+      - build
+      - lint
+      - prettier
+      - test
+          context: aws-dev
+          requires:
+            - build

@@ -1,0 +1,49 @@
+{
+  "author": "Jim Razmus II",
+  "bin": {
+    "al": "src/cli.js"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.358.0",
+    "commander": "^2.19.0",
+    "lodash": "^4.17.11"
+  },
+  "description": "Manage AMI launch permissions",
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-prettier": "^3.3.0",
+    "jest": "^23.6.0",
+    "jest-junit": "^5.2.0",
+    "prettier": "^1.15.2"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "engines": {
+    "node": ">=8.10.0"
+  },
+  "jest": {
+    "reporters": [
+      "default",
+      "jest-junit"
+    ]
+  },
+  "keywords": [
+    "amazon",
+    "aws",
+    "ami"
+  ],
+  "license": "MIT",
+  "main": "src/cli.js",
+  "name": "ami-ledger",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --format junit --output-file ./reports/eslint/eslint.xml 'src/**/*.js'",
+    "lint:test": "eslint 'test/**/*.js'",
+    "prettier": "prettier --list-different \"src/**/*.js\"",
+    "prettier:test": "prettier --write \"test/**/*.js\"",
+    "pretty": "prettier --write \"src/**/*.js\"",
+    "test": "jest --ci --reporters=default --reporters=jest-junit --coverage"
+  },
+  "version": "1.0.0"
+}
