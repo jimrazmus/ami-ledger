@@ -22,6 +22,9 @@ version: 2
 jobs:
   build:
     <<: *defaults
+    - run:
+        Name: No-op
+        command: yarn --version
   lint:
     <<: *defaults
     - run:
