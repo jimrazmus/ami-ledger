@@ -96,7 +96,7 @@ workflows:
       - build
       - lint
       - prettier
-      - test
+      - test:
           context: aws-dev
   deploy:
     jobs:
