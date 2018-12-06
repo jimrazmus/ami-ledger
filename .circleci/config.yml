@@ -89,7 +89,7 @@ jobs:
           name: Jest testing
           command: yarn run test
       - store_test_results:
-          path: ~/reports/junit
+          path: ~/reports/jest
 workflows:
   build-lint-test:
     jobs:

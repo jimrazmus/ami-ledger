@@ -28,6 +28,9 @@
       "jest-junit"
     ]
   },
+  "jest-junit": {
+    "outputDirectory": "./reports/jest/"
+  },
   "keywords": [
     "amazon",
     "aws",
