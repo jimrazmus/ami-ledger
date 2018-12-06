@@ -6,7 +6,7 @@ jobs:
     working_directory: ~/ami-ledger
     steps:
       - checkout
-      - restore-cache:
+      - restore_cache:
           paths:
             - node_modules
             - ~/.cache/yarn
@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
-      - save-cache:
+      - save_cache:
           paths:
             - node_modules
             - ~/.cache/yarn
@@ -30,7 +30,7 @@ jobs:
     working_directory: ~/ami-ledger
     steps:
       - checkout
-      - restore-cache:
+      - restore_cache:
           paths:
             - node_modules
             - ~/.cache/yarn
@@ -39,7 +39,7 @@ jobs:
       - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
-      - save-cache:
+      - save_cache:
           paths:
             - node_modules
             - ~/.cache/yarn
@@ -54,7 +54,7 @@ jobs:
     working_directory: ~/ami-ledger
     steps:
       - checkout
-      - restore-cache:
+      - restore_cache:
           paths:
             - node_modules
             - ~/.cache/yarn
@@ -63,7 +63,7 @@ jobs:
       - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
-      - save-cache:
+      - save_cache:
           paths:
             - node_modules
             - ~/.cache/yarn
@@ -78,7 +78,7 @@ jobs:
     working_directory: ~/ami-ledger
     steps:
       - checkout
-      - restore-cache:
+      - restore_cache:
           paths:
             - node_modules
             - ~/.cache/yarn
@@ -87,7 +87,7 @@ jobs:
       - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
-      - save-cache:
+      - save_cache:
           paths:
             - node_modules
             - ~/.cache/yarn
