@@ -1,8 +1,14 @@
 version: 2.1
-commands:
-  juggle-cache:
-    description: "Attempt cache restore, yarn install, and cache save"
+executors:
+  my-executor:
+    docker:
+      - image: circleci/node:8.10.0-browser
+jobs:
+  build:
+    executor: my-executor
+    working_directory: ~/ami-ledger
     steps:
+      - checkout
       - restore-cache:
           paths:
             - node_modules
@@ -18,44 +24,75 @@ commands:
             - ~/.cache/yarn
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
-jobs:
-  build:
-    docker:
-      - image: circleci/node:8.10.0-browser
-    working_directory: ~/ami-ledger
-    steps:
-      - checkout
-      - juggle-cache
       - run:
           Name: No-op
           command: yarn --version
   lint:
-    docker:
-      - image: circleci/node:8.10.0-browser
+    executor: my-executor
     working_directory: ~/ami-ledger
     steps:
       - checkout
-      - juggle-cache
+      - restore-cache:
+          paths:
+            - node_modules
+            - ~/.cache/yarn
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
+      - save-cache:
+          paths:
+            - node_modules
+            - ~/.cache/yarn
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           Name: Lint
           command: yarn run lint
   prettier:
-    docker:
-      - image: circleci/node:8.10.0-browser
+    executor: my-executor
     working_directory: ~/ami-ledger
     steps:
       - checkout
-      - juggle-cache
+      - restore-cache:
+          paths:
+            - node_modules
+            - ~/.cache/yarn
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
+      - save-cache:
+          paths:
+            - node_modules
+            - ~/.cache/yarn
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Prettier
           command: yarn run prettier
   test:
-    docker:
-      - image: circleci/node:8.10.0-browser
+    executor: my-executor
     working_directory: ~/ami-ledger
     steps:
       - checkout
-      - juggle-cache
+      - restore-cache:
+          paths:
+            - node_modules
+            - ~/.cache/yarn
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
+      - save-cache:
+          paths:
+            - node_modules
+            - ~/.cache/yarn
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Jest testing
           command: yarn run test
