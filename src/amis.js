@@ -82,11 +82,23 @@ function buildLauchPermission(ami_id, current, target) {
   };
 
   if (additions.length > 0) {
-    params.LaunchPermission.Add = [...new Set(additions)];
+    const uniqAdds = [...new Set(additions)];
+    params.LaunchPermission.Add = [];
+    uniqAdds.forEach(element => {
+      params.LaunchPermission.Add.push({
+        UserId: element
+      });
+    });
   }
 
   if (removals.length > 0) {
-    params.LaunchPermission.Remove = [...new Set(removals)];
+    const uniqRmvs = [...new Set(removals)];
+    params.LaunchPermission.Remove = [];
+    uniqRmvs.forEach(element => {
+      params.LaunchPermission.Remove.push({
+        UserId: element
+      });
+    });
   }
 
   return params;
