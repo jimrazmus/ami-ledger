@@ -10,8 +10,7 @@ jobs:
           paths:
             - node_modules
             - ~/.cache/yarn
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
@@ -19,8 +18,7 @@ jobs:
           paths:
             - node_modules
             - ~/.cache/yarn
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           Name: No-op
           command: yarn --version
@@ -34,8 +32,7 @@ jobs:
           paths:
             - node_modules
             - ~/.cache/yarn
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
@@ -43,8 +40,7 @@ jobs:
           paths:
             - node_modules
             - ~/.cache/yarn
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           Name: Lint
           command: yarn run lint
@@ -58,8 +54,7 @@ jobs:
           paths:
             - node_modules
             - ~/.cache/yarn
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
@@ -67,8 +62,7 @@ jobs:
           paths:
             - node_modules
             - ~/.cache/yarn
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Prettier
           command: yarn run prettier
@@ -82,8 +76,7 @@ jobs:
           paths:
             - node_modules
             - ~/.cache/yarn
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
@@ -91,8 +84,7 @@ jobs:
           paths:
             - node_modules
             - ~/.cache/yarn
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Jest testing
           command: yarn run test
