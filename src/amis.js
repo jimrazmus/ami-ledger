@@ -45,27 +45,15 @@ async function fetchLaunchPermissions(ami_id) {
   }
 }
 
-function setLaunchPermissions(ami_id, params) {
-  return true;
-  // var params = {
-  //     ImageId: "ami-5731123e",
-  //     LaunchPermission: {
-  //         Add: [
-  //             {
-  //                 UserId: "123456789012"
-  //             }
-  //         ]
-  //         Remove: [
-  //             {
-  //                 UserId: "123456789012"
-  //             }
-  //         ]
-  //     }
-  // };
-
-  // Consider supporting the OperationType parameter to select adding or removing
-  //   launch permissions instead of both.
-  // Consider supporting the DryRun parameter.
+async function setLaunchPermissions(params) {
+  try {
+    const ec2 = new AWS.EC2();
+    const data = await ec2.modifyImageAttribute(params).promise();
+    return true;
+  } catch (e) {
+    console.log(e);
+    return e;
+  }
 }
 
 function buildLauchPermission(ami_id, current, target) {
