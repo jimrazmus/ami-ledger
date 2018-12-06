@@ -68,7 +68,7 @@ function setLaunchPermissions(ami_id, params) {
   // Consider supporting the DryRun parameter.
 }
 
-function buildLauchPermission(ami_id,current,target) {
+function buildLauchPermission(ami_id, current, target) {
   const additions = target.filter(x => !current.includes(x));
   const removals = current.filter(x => !target.includes(x));
 
@@ -79,7 +79,7 @@ function buildLauchPermission(ami_id,current,target) {
   const params = {
     ImageId: ami_id,
     LaunchPermission: {}
-  }
+  };
 
   if (additions.length > 0) {
     params.LaunchPermission.Add = [...new Set(additions)];
