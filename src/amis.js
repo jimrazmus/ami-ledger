@@ -66,14 +66,34 @@ function setLaunchPermissions(ami_id, params) {
   // Consider supporting the OperationType parameter to select adding or removing
   //   launch permissions instead of both.
   // Consider supporting the DryRun parameter.
+}
 
-  // ec2.modifyImageAttribute(params, function (err, data) {
-  //     if (err) console.log(err, err.stack); // an error occurred
-  //     else console.log(data);           // successful response
-  // });
+function buildLauchPermission(ami_id,current,target) {
+  const additions = target.filter(x => !current.includes(x));
+  const removals = current.filter(x => !target.includes(x));
+
+  if (additions.length == 0 && removals.length == 0) {
+    return null;
+  }
+
+  const params = {
+    ImageId: ami_id,
+    LaunchPermission: {}
+  }
+
+  if (additions.length > 0) {
+    params.LaunchPermission.Add = [...new Set(additions)];
+  }
+
+  if (removals.length > 0) {
+    params.LaunchPermission.Remove = [...new Set(removals)];
+  }
+
+  return params;
 }
 
 module.exports = {
+  buildLauchPermission: buildLauchPermission,
   fetchAmiIds: fetchAmiIds,
   fetchLaunchPermissions: fetchLaunchPermissions,
   setLaunchPermissions: setLaunchPermissions
