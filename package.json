@@ -42,6 +42,7 @@
   "name": "ami-ledger",
   "private": true,
   "scripts": {
+    "clean": "rm -rf ./{coverage,reports}",
     "lint": "eslint --format junit --output-file ./reports/eslint/eslint.xml 'src/**/*.js'",
     "lint:test": "eslint 'test/**/*.js'",
     "prettier": "prettier --list-different \"src/**/*.js\"",
