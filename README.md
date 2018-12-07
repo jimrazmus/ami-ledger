@@ -1,3 +1,1 @@
-# ami-ledger
-
-[![CircleCI](https://circleci.com/gh/jimrazmus/ami-ledger/tree/master.svg?style=svg)](https://circleci.com/gh/jimrazmus/ami-ledger/tree/master)
+# ami-ledger &middot; ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg) [![CircleCI](https://circleci.com/gh/jimrazmus/ami-ledger/tree/master.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/jimrazmus/ami-ledger/tree/master)
