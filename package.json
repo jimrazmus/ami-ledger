@@ -6,6 +6,7 @@
   "dependencies": {
     "aws-sdk": "^2.358.0",
     "commander": "^2.19.0",
+    "convict": "^4.4.0",
     "lodash": "^4.17.11"
   },
   "description": "Manage AMI launch permissions",
