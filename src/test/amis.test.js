@@ -123,7 +123,7 @@ test("buildParams list4 list5", () => {
     ImageId: dummyAmiID,
     LaunchPermission: {
       Remove: [
-        { UserId: "491392172038" },
+        { UserId: awsAcctId },
         { UserId: "123456789012" },
         { UserId: "234567890123" },
         { UserId: "345678901234" }
@@ -138,7 +138,7 @@ test("buildParams list4 list6", () => {
     LaunchPermission: {
       Add: [{ UserId: "0" }],
       Remove: [
-        { UserId: "491392172038" },
+        { UserId: awsAcctId },
         { UserId: "123456789012" },
         { UserId: "234567890123" },
         { UserId: "345678901234" }
@@ -172,7 +172,7 @@ test("buildParams list6 list4", () => {
     ImageId: dummyAmiID,
     LaunchPermission: {
       Add: [
-        { UserId: "491392172038" },
+        { UserId: awsAcctId },
         { UserId: "123456789012" },
         { UserId: "234567890123" },
         { UserId: "345678901234" }
@@ -187,7 +187,7 @@ test("buildParams list5 list4", () => {
     ImageId: dummyAmiID,
     LaunchPermission: {
       Add: [
-        { UserId: "491392172038" },
+        { UserId: awsAcctId },
         { UserId: "123456789012" },
         { UserId: "234567890123" },
         { UserId: "345678901234" }
