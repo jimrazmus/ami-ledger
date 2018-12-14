@@ -123,3 +123,6 @@ typings/
 
 # jest test output
 reports/
+
+### Direnv ###
+.envrc
