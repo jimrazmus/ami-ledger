@@ -18,9 +18,9 @@ async function fetchAmiIds(params) {
     });
 
     return imageIds;
-  } catch (e) {
-    console.log(e);
-    return e;
+  } catch (err) {
+    console.log(err);
+    return err;
   }
 }
 
@@ -56,7 +56,7 @@ async function setLaunchPermissions(params) {
   }
 }
 
-function buildLauchPermission(ami_id, current, target) {
+function buildLaunchPermission(ami_id, current, target) {
   const additions = target.filter(x => !current.includes(x));
   const removals = current.filter(x => !target.includes(x));
 
@@ -70,9 +70,9 @@ function buildLauchPermission(ami_id, current, target) {
   };
 
   if (additions.length > 0) {
-    const uniqAdds = [...new Set(additions)];
+    const uniqAdditions = [...new Set(additions)];
     params.LaunchPermission.Add = [];
-    uniqAdds.forEach(element => {
+    uniqAdditions.forEach(element => {
       params.LaunchPermission.Add.push({
         UserId: element
       });
@@ -80,9 +80,9 @@ function buildLauchPermission(ami_id, current, target) {
   }
 
   if (removals.length > 0) {
-    const uniqRmvs = [...new Set(removals)];
+    const uniqRemovals = [...new Set(removals)];
     params.LaunchPermission.Remove = [];
-    uniqRmvs.forEach(element => {
+    uniqRemovals.forEach(element => {
       params.LaunchPermission.Remove.push({
         UserId: element
       });
@@ -93,7 +93,7 @@ function buildLauchPermission(ami_id, current, target) {
 }
 
 module.exports = {
-  buildLauchPermission: buildLauchPermission,
+  buildLaunchPermission: buildLaunchPermission,
   fetchAmiIds: fetchAmiIds,
   fetchLaunchPermissions: fetchLaunchPermissions,
   setLaunchPermissions: setLaunchPermissions
