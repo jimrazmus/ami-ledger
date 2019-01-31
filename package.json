@@ -7,12 +7,12 @@
     "aws-sdk": "2.358.0",
     "commander": "2.19.0",
     "convict": "4.4.0",
-    "dotenv": "^6.2.0",
+    "dotenv": "6.2.0",
     "lodash": "4.17.11"
   },
   "description": "Manage AMI launch permissions",
   "devDependencies": {
-    "coveralls": "^3.0.2",
+    "coveralls": "3.0.2",
     "eslint": "5.9.0",
     "eslint-config-prettier": "3.3.0",
     "jest": "23.6.0",
