@@ -24,7 +24,7 @@ jobs:
           command: yarn --version
   lint:
     docker:
-      - image: circleci/node:8.10.0-browsers
+      - image: circleci/node:8.14.1-browsers
     working_directory: ~/ami-ledger
     steps:
       - checkout
