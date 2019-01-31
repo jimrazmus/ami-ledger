@@ -1,8 +1,11 @@
 version: 2.1
-jobs:
-  build:
+executors:
+  node:
     docker:
       - image: circleci/node:8.15.0-browsers
+jobs:
+  build:
+    executor: node
     working_directory: ~/ami-ledger
     steps:
       - checkout
@@ -23,8 +26,7 @@ jobs:
           Name: No-op
           command: yarn --version
   lint:
-    docker:
-      - image: circleci/node:8.14.1-browsers
+    executor: node
     working_directory: ~/ami-ledger
     steps:
       - checkout
@@ -45,8 +47,7 @@ jobs:
           Name: Lint
           command: yarn run lint
   prettier:
-    docker:
-      - image: circleci/node:8.10.0-browsers
+    executor: node
     working_directory: ~/ami-ledger
     steps:
       - checkout
@@ -67,8 +68,7 @@ jobs:
           name: Prettier
           command: yarn run prettier
   test:
-    docker:
-      - image: circleci/node:8.10.0-browsers
+    executor: node
     working_directory: ~/ami-ledger
     steps:
       - checkout
