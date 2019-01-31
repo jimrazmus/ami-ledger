@@ -3,10 +3,10 @@ executors:
   node:
     docker:
       - image: circleci/node:8.15.0-browsers
+    working_directory: ~/ami-ledger
 jobs:
   build:
     executor: node
-    working_directory: ~/ami-ledger
     steps:
       - checkout
       - restore_cache:
@@ -27,7 +27,6 @@ jobs:
           command: yarn --version
   lint:
     executor: node
-    working_directory: ~/ami-ledger
     steps:
       - checkout
       - restore_cache:
@@ -48,7 +47,6 @@ jobs:
           command: yarn run lint
   prettier:
     executor: node
-    working_directory: ~/ami-ledger
     steps:
       - checkout
       - restore_cache:
@@ -69,7 +67,6 @@ jobs:
           command: yarn run prettier
   test:
     executor: node
-    working_directory: ~/ami-ledger
     steps:
       - checkout
       - restore_cache:
