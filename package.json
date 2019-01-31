@@ -11,6 +11,7 @@
   },
   "description": "Manage AMI launch permissions",
   "devDependencies": {
+    "coveralls": "^3.0.2",
     "eslint": "5.9.0",
     "eslint-config-prettier": "3.3.0",
     "jest": "23.6.0",
@@ -43,6 +44,7 @@
   "private": true,
   "scripts": {
     "clean": "rm -rf ./{coverage,reports}",
+    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "lint": "eslint --format junit --output-file ./reports/eslint/eslint.xml 'src/**/*.js'",
     "lint:test": "eslint 'test/**/*.js'",
     "prettier": "prettier --list-different \"src/**/*.js\"",
