@@ -6,7 +6,7 @@
   "dependencies": {
     "aws-sdk": "2.395.0",
     "commander": "2.19.0",
-    "convict": "4.4.0",
+    "convict": "4.4.1",
     "dotenv": "6.2.0",
     "lodash": "4.17.11"
   },
