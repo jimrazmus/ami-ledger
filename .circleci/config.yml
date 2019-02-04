@@ -87,14 +87,22 @@ jobs:
           command: yarn run test
       - store_test_results:
           path: reports/jest
+  test-init:
+    docker:
+      - image: jimrazmus/awscli
+    steps:
+      - run: aws ec2 modify-image-attribute --image-id $DUMMY_AMI_ID --attribute launchPermission --user-ids "$AWS_ACCT_ID"
 workflows:
   build-lint-test:
     jobs:
       - build
       - lint
       - prettier
+      - testinit:
+          context: aws-dev
       - test:
           context: aws-dev
+          requires: test-init
   deploy:
     jobs:
       - build
