@@ -98,7 +98,7 @@ workflows:
       - build
       - lint
       - prettier
-      - testinit:
+      - test-init:
           context: aws-dev
       - test:
           context: aws-dev
