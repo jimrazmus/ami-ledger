@@ -93,7 +93,7 @@ test("setLaunchPermissions returns true", async () => {
 });
 
 test("buildParams list1 list2", () => {
-  expect(amis.buildLauchPermission(dummyAmiID, list1, list2)).toEqual({
+  expect(amis.buildLaunchPermission(dummyAmiID, list1, list2)).toEqual({
     ImageId: dummyAmiID,
     LaunchPermission: {
       Add: [{ UserId: "123456789012" }, { UserId: "234567890123" }]
@@ -102,7 +102,7 @@ test("buildParams list1 list2", () => {
 });
 
 test("buildParams list2 list3", () => {
-  expect(amis.buildLauchPermission(dummyAmiID, list2, list3)).toEqual({
+  expect(amis.buildLaunchPermission(dummyAmiID, list2, list3)).toEqual({
     ImageId: dummyAmiID,
     LaunchPermission: {
       Add: [{ UserId: "345678901234" }],
@@ -112,14 +112,14 @@ test("buildParams list2 list3", () => {
 });
 
 test("buildParams list3 list4", () => {
-  expect(amis.buildLauchPermission(dummyAmiID, list3, list4)).toEqual({
+  expect(amis.buildLaunchPermission(dummyAmiID, list3, list4)).toEqual({
     ImageId: dummyAmiID,
     LaunchPermission: { Add: [{ UserId: "123456789012" }] }
   });
 });
 
 test("buildParams list4 list5", () => {
-  expect(amis.buildLauchPermission(dummyAmiID, list4, list5)).toEqual({
+  expect(amis.buildLaunchPermission(dummyAmiID, list4, list5)).toEqual({
     ImageId: dummyAmiID,
     LaunchPermission: {
       Remove: [
@@ -133,7 +133,7 @@ test("buildParams list4 list5", () => {
 });
 
 test("buildParams list4 list6", () => {
-  expect(amis.buildLauchPermission(dummyAmiID, list4, list6)).toEqual({
+  expect(amis.buildLaunchPermission(dummyAmiID, list4, list6)).toEqual({
     ImageId: dummyAmiID,
     LaunchPermission: {
       Add: [{ UserId: "0" }],
@@ -148,27 +148,27 @@ test("buildParams list4 list6", () => {
 });
 
 test("buildParams list1 list1", () => {
-  expect(amis.buildLauchPermission(dummyAmiID, list1, list1)).toEqual(null);
+  expect(amis.buildLaunchPermission(dummyAmiID, list1, list1)).toEqual(null);
 });
 
 test("buildParams list2 list2", () => {
-  expect(amis.buildLauchPermission(dummyAmiID, list2, list2)).toEqual(null);
+  expect(amis.buildLaunchPermission(dummyAmiID, list2, list2)).toEqual(null);
 });
 
 test("buildParams list3 list3", () => {
-  expect(amis.buildLauchPermission(dummyAmiID, list3, list3)).toEqual(null);
+  expect(amis.buildLaunchPermission(dummyAmiID, list3, list3)).toEqual(null);
 });
 
 test("buildParams list4 list4", () => {
-  expect(amis.buildLauchPermission(dummyAmiID, list4, list4)).toEqual(null);
+  expect(amis.buildLaunchPermission(dummyAmiID, list4, list4)).toEqual(null);
 });
 
 test("buildParams list5 list5", () => {
-  expect(amis.buildLauchPermission(dummyAmiID, list5, list5)).toEqual(null);
+  expect(amis.buildLaunchPermission(dummyAmiID, list5, list5)).toEqual(null);
 });
 
 test("buildParams list6 list4", () => {
-  expect(amis.buildLauchPermission(dummyAmiID, list6, list4)).toEqual({
+  expect(amis.buildLaunchPermission(dummyAmiID, list6, list4)).toEqual({
     ImageId: dummyAmiID,
     LaunchPermission: {
       Add: [
@@ -183,7 +183,7 @@ test("buildParams list6 list4", () => {
 });
 
 test("buildParams list5 list4", () => {
-  expect(amis.buildLauchPermission(dummyAmiID, list5, list4)).toEqual({
+  expect(amis.buildLaunchPermission(dummyAmiID, list5, list4)).toEqual({
     ImageId: dummyAmiID,
     LaunchPermission: {
       Add: [
@@ -197,14 +197,14 @@ test("buildParams list5 list4", () => {
 });
 
 test("buildParams list4 list3", () => {
-  expect(amis.buildLauchPermission(dummyAmiID, list4, list3)).toEqual({
+  expect(amis.buildLaunchPermission(dummyAmiID, list4, list3)).toEqual({
     ImageId: dummyAmiID,
     LaunchPermission: { Remove: [{ UserId: "123456789012" }] }
   });
 });
 
 test("buildParams list3 list2", () => {
-  expect(amis.buildLauchPermission(dummyAmiID, list3, list2)).toEqual({
+  expect(amis.buildLaunchPermission(dummyAmiID, list3, list2)).toEqual({
     ImageId: dummyAmiID,
     LaunchPermission: {
       Add: [{ UserId: "123456789012" }],
@@ -214,7 +214,7 @@ test("buildParams list3 list2", () => {
 });
 
 test("buildParams list2 list1", () => {
-  expect(amis.buildLauchPermission(dummyAmiID, list2, list1)).toEqual({
+  expect(amis.buildLaunchPermission(dummyAmiID, list2, list1)).toEqual({
     ImageId: dummyAmiID,
     LaunchPermission: {
       Remove: [{ UserId: "123456789012" }, { UserId: "234567890123" }]
