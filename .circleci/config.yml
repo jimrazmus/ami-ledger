@@ -89,7 +89,11 @@ workflows:
       - prettier
       - test_init:
           context: aws-dev
+          requires:
+            - build
+            - lint
+            - prettier
       - test:
           context: aws-dev
-          requires: 
+          requires:
             - test_init
