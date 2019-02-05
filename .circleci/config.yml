@@ -81,6 +81,7 @@ jobs:
       - run: aws ec2 modify-image-attribute --image-id "$DUMMY_AMI_ID" --attribute launchPermission --user-ids "$AWS_ACCT_ID"
 
 workflows:
+  version: 2
   doit:
     jobs:
       - build
@@ -92,6 +93,3 @@ workflows:
           context: aws-dev
           requires: 
             - test_init
-  deploy:
-    jobs:
-      - build
