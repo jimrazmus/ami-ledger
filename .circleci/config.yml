@@ -1,108 +1,97 @@
-version: 2.1
-executors:
-  node:
+version: 2.0
+
+references:
+
+  getcache: &getcache
+    restore_cache:
+      paths:
+        - node_modules
+        - ~/.cache/yarn
+      key: yarn-packages-{{ checksum "yarn.lock" }}
+
+  install_depends: &install_depends
+    run:
+      name: Install Dependencies
+      command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
+
+  putcache: &putcache
+    save_cache:
+      paths:
+        - node_modules
+        - ~/.cache/yarn
+      key: yarn-packages-{{ checksum "yarn.lock" }}
+
+  container: &container
     docker:
       - image: circleci/node:8.15.0-browsers
     working_directory: ~/ami-ledger
+
 jobs:
+
   build:
-    executor: node
+    <<: *container
     steps:
       - checkout
-      - restore_cache:
-          paths:
-            - node_modules
-            - ~/.cache/yarn
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
-      - save_cache:
-          paths:
-            - node_modules
-            - ~/.cache/yarn
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+      - *getcache
+      - *install_depends
+      - *putcache
       - run:
           Name: No-op
           command: yarn --version
+
   lint:
-    executor: node
+    <<: *container
     steps:
       - checkout
-      - restore_cache:
-          paths:
-            - node_modules
-            - ~/.cache/yarn
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
-      - save_cache:
-          paths:
-            - node_modules
-            - ~/.cache/yarn
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+      - *getcache
+      - *install_depends
+      - *putcache
       - run:
           Name: Lint
           command: yarn run lint
+
   prettier:
-    executor: node
+    <<: *container
     steps:
       - checkout
-      - restore_cache:
-          paths:
-            - node_modules
-            - ~/.cache/yarn
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
-      - save_cache:
-          paths:
-            - node_modules
-            - ~/.cache/yarn
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+      - *getcache
+      - *install_depends
+      - *putcache
       - run:
           name: Prettier
           command: yarn run prettier
+
   test:
-    executor: node
+    <<: *container
     steps:
       - checkout
-      - restore_cache:
-          paths:
-            - node_modules
-            - ~/.cache/yarn
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
-      - save_cache:
-          paths:
-            - node_modules
-            - ~/.cache/yarn
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+      - *getcache
+      - *install_depends
+      - *putcache
       - run:
           name: Jest testing
           command: yarn run test
       - store_test_results:
           path: reports/jest
-  test-init:
+
+  test_init:
     docker:
       - image: jimrazmus/awscli
     steps:
-      - run: aws ec2 modify-image-attribute --image-id $DUMMY_AMI_ID --attribute launchPermission --user-ids "$AWS_ACCT_ID"
+      - run: aws ec2 modify-image-attribute --image-id "$DUMMY_AMI_ID" --attribute launchPermission --user-ids "$AWS_ACCT_ID"
+
 workflows:
-  build-lint-test:
+  doit:
     jobs:
       - build
       - lint
       - prettier
-      - test-init:
+      - test_init:
           context: aws-dev
       - test:
           context: aws-dev
-          requires: test-init
+          requires: 
+            - test_init
   deploy:
     jobs:
       - build
