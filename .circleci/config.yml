@@ -78,7 +78,8 @@ jobs:
     docker:
       - image: jimrazmus/awscli
     steps:
-      - run: aws ec2 modify-image-attribute --image-id "$DUMMY_AMI_ID" --attribute launchPermission --user-ids "$AWS_ACCT_ID"
+      - run: aws ec2 reset-image-attribute --image-id $DUMMY_AMI_ID --attribute launchPermission
+      - run: aws ec2 modify-image-attribute --image-id $DUMMY_AMI_ID --launch-permission "Add=[{UserId=$AWS_ACCT_ID}]"
 
 workflows:
   version: 2
