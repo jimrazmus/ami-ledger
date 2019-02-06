@@ -74,8 +74,8 @@ jobs:
       - store_test_results:
           path: reports/jest
       - run:
-        name: Upload to CodeCov.io
-        command: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+          name: Upload to CodeCov.io
+          command: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 
   test_init:
     docker:
