@@ -73,6 +73,7 @@ jobs:
           command: yarn run test
       - store_test_results:
           path: reports/jest
+      - run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 
   test_init:
     docker:
