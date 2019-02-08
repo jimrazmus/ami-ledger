@@ -8,11 +8,10 @@
     "commander": "2.19.0",
     "convict": "4.4.1",
     "dotenv": "6.2.0",
-    "lodash": "4.17.11"
+    "loglevel": "^1.6.1"
   },
   "description": "Manage AMI launch permissions",
   "devDependencies": {
-    "coveralls": "3.0.2",
     "eslint": "5.13.0",
     "eslint-config-prettier": "4.0.0",
     "jest": "24.1.0",
@@ -45,7 +44,6 @@
   "private": true,
   "scripts": {
     "clean": "rm -rf ./{coverage,reports}",
-    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "lint": "eslint --format junit --output-file ./reports/eslint/eslint.xml 'src/**/*.js'",
     "lint:test": "eslint 'test/**/*.js'",
     "prettier": "prettier --list-different \"src/**/*.js\"",
