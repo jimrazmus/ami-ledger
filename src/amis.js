@@ -2,13 +2,15 @@
 
 const AWS = require("aws-sdk/global");
 const EC2 = require("aws-sdk/clients/ec2");
+const log = require("loglevel");
 
-// AWS.config.update({ region: 'us-east-1' });
-// AWS.config.update({ maxRetries: 5 });
-// AWS.config.logger = console;
+AWS.config.logger = log;
 
 async function fetchAmiIds(params) {
   try {
+    log.trace("fetchAmiIds");
+    log.debug("AWS.config: " + JSON.stringify(AWS.config));
+
     const ec2 = new AWS.EC2();
     const data = await ec2.describeImages(params).promise();
     const imageIds = [];
@@ -19,13 +21,14 @@ async function fetchAmiIds(params) {
 
     return imageIds;
   } catch (err) {
-    console.log(err);
+    log.error(err);
     return err;
   }
 }
 
 async function fetchLaunchPermissions(ami_id) {
   try {
+    log.trace("fetchLaunchPermissions");
     const ec2 = new AWS.EC2();
     const params = {
       Attribute: "launchPermission",
@@ -39,24 +42,26 @@ async function fetchLaunchPermissions(ami_id) {
     });
 
     return userIds;
-  } catch (e) {
-    console.log(e);
-    return e;
+  } catch (err) {
+    log.error(err);
+    return err;
   }
 }
 
 async function setLaunchPermissions(params) {
   try {
+    log.trace("setLaunchPermissions");
     const ec2 = new AWS.EC2();
     const data = await ec2.modifyImageAttribute(params).promise();
     return true;
-  } catch (e) {
-    console.log(e);
-    return e;
+  } catch (err) {
+    log.error(err);
+    return err;
   }
 }
 
 function buildLaunchPermission(ami_id, current, target) {
+  log.trace("buildLaunchPermissions");
   const additions = target.filter(x => !current.includes(x));
   const removals = current.filter(x => !target.includes(x));
 
