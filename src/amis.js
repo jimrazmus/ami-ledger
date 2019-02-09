@@ -65,7 +65,7 @@ function buildLaunchPermission(ami_id, current, target) {
   const additions = target.filter(x => !current.includes(x));
   const removals = current.filter(x => !target.includes(x));
 
-  if (additions.length == 0 && removals.length == 0) {
+  if (additions.length === 0 && removals.length === 0) {
     return null;
   }
 
