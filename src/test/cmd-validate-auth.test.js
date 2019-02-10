@@ -1,8 +1,8 @@
 "use strict";
 
-const sts = require("../cmd-validate-auth.js");
+const cva = require("../cmd-validate-auth.js");
 
 test("confirmCreds succeeds", async () => {
-  const result = sts.confirmCreds("error");
+  const result = cva.confirmCreds("error");
   expect(result).not.toBeNull();
 });
