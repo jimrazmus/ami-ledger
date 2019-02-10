@@ -39,7 +39,6 @@
     "ami"
   ],
   "license": "MIT",
-  "main": "src/cli.js",
   "name": "ami-ledger",
   "private": true,
   "scripts": {
