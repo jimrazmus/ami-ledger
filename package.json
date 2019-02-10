@@ -1,7 +1,7 @@
 {
   "author": "Jim Razmus II",
   "bin": {
-    "al": "src/cli.js"
+    "al": "./bin/cli.js"
   },
   "dependencies": {
     "aws-sdk": "2.399.0",
