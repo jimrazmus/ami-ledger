@@ -8,7 +8,7 @@ const cmd = require("commander");
 const log = require("loglevel");
 
 const amis = require("../src/amis.js");
-const cva = require("../src/cmd-validate-auth.js");
+const cva = require("../src/command-validate-auth.js");
 
 cmd
   .description('it does stuff')
