@@ -1,7 +1,6 @@
 "use strict";
 
-const AWS = require("aws-sdk/global");
-const EC2 = require("aws-sdk/clients/ec2");
+const AWS = require("aws-sdk");
 const log = require("loglevel");
 
 AWS.config.logger = log;
