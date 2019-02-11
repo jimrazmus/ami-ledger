@@ -5,9 +5,9 @@ const log = require("loglevel");
 const amis = require("./amis.js");
 const flags = require("./flags.js");
 
-function remove(logLevel) {
+function full(logLevel) {
   log.setLevel(logLevel, true);
-  log.trace("command-remove.remove");
+  log.trace("command-full.full");
   log.info("Environment Variables:\n" + JSON.stringify(process.env) + "\n");
 
   const cfg = require("../al.json");
@@ -83,4 +83,4 @@ function processAmi(amiId, accts) {
   );
 }
 
-module.exports = { remove: remove };
+module.exports = { full: full };
