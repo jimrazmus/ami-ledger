@@ -5,9 +5,9 @@ const flags = require("../flags.js");
 const ALL = flags.ADD | flags.REMOVE;
 
 test("Add flag is on", () => {
-    var flag = 0 | flags.ADD;
-    expect(flags.isAddSet(flag)).toBe(true);
-  });
+  var flag = 0 | flags.ADD;
+  expect(flags.isAddSet(flag)).toBe(true);
+});
 
 test("Add flag is off", () => {
   var flag = 0;
