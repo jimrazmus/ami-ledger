@@ -3,5 +3,5 @@
 const commandAdd = require("../command-add.js");
 
 test("expect command add to throw", () => {
-    expect(commandAdd.add).toThrow();
-  });
+  expect(commandAdd.add).toThrow();
+});
