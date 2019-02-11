@@ -3,6 +3,8 @@
 const AWS = require("aws-sdk");
 const log = require("loglevel");
 
+const flags = require("./flags.js");
+
 AWS.config.logger = log;
 
 async function fetchAmiIds(params) {
@@ -59,7 +61,7 @@ async function setLaunchPermissions(params) {
   }
 }
 
-function buildLaunchPermission(ami_id, current, target) {
+function buildLaunchPermission(ami_id, current, target, flag) {
   log.trace("buildLaunchPermissions");
   const additions = target.filter(x => !current.includes(x));
   const removals = current.filter(x => !target.includes(x));
@@ -73,7 +75,7 @@ function buildLaunchPermission(ami_id, current, target) {
     LaunchPermission: {}
   };
 
-  if (additions.length > 0) {
+  if (additions.length > 0 && flags.isAddSet(flag)) {
     const uniqAdditions = [...new Set(additions)];
     params.LaunchPermission.Add = [];
     uniqAdditions.forEach(element => {
@@ -83,7 +85,7 @@ function buildLaunchPermission(ami_id, current, target) {
     });
   }
 
-  if (removals.length > 0) {
+  if (removals.length > 0 && flags.isRemoveSet(flag)) {
     const uniqRemovals = [...new Set(removals)];
     params.LaunchPermission.Remove = [];
     uniqRemovals.forEach(element => {

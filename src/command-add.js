@@ -3,6 +3,7 @@
 const log = require("loglevel");
 
 const amis = require("./amis.js");
+const flags = require("./flags.js");
 
 function add(logLevel) {
   log.setLevel(logLevel, true);
@@ -53,7 +54,8 @@ function processAmi(amiId, accts) {
       const targetLaunchPermissions = amis.buildLaunchPermission(
         amiId,
         launchPermissions,
-        accts
+        accts,
+        flags.ADD
       );
       if (targetLaunchPermissions !== null) {
         const setLaunchPermissionsPromise = amis.setLaunchPermissions(
