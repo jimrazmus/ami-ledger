@@ -44,10 +44,8 @@
   "scripts": {
     "clean": "rm -rf ./{coverage,reports}",
     "lint": "eslint --format junit --output-file ./reports/eslint/eslint.xml 'src/**/*.js'",
-    "lint:test": "eslint 'test/**/*.js'",
-    "prettier": "prettier --list-different \"src/**/*.js\"",
-    "prettier:test": "prettier --write \"test/**/*.js\"",
-    "pretty": "prettier --write \"src/**/*.js\"",
+    "pretty": "prettier --write \"{bin,src}/**/*.js\"",
+    "pretty-test": "prettier --list-different \"{bin,src}/**/*.js\"",
     "test": "jest --ci --reporters=default --reporters=jest-junit --coverage"
   },
   "version": "1.0.0"

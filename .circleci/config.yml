@@ -59,7 +59,7 @@ jobs:
       - *putcache
       - run:
           name: Prettier
-          command: yarn run prettier
+          command: yarn run pretty-test
 
   test:
     <<: *container
