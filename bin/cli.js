@@ -8,8 +8,9 @@ const cmd = require("commander");
 const log = require("loglevel");
 
 const amis = require("../src/amis.js");
-const commandVal = require("../src/command-validate-auth.js");
 const commandAdd = require("../src/command-add.js");
+const commandRmv = require("../src/command-remove.js");
+const commandVal = require("../src/command-validate-auth.js");
 
 cmd
   .description('it does stuff')
@@ -28,6 +29,13 @@ cmd
   .description('Add account IDs to AMI permissions')
   .action(function(){
     commandAdd.add(cmd.loglevel)
+  });
+
+cmd
+  .command('remove')
+  .description('Remove account IDs from AMI permissions')
+  .action(function(){
+    commandRmv.remove(cmd.loglevel)
   });
 
 cmd.parse(process.argv);
