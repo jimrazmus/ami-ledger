@@ -22,7 +22,7 @@ cmd
     "error"
   )
   .version("1.0.0");
-  
+
 cmd
   .command("auth")
   .description("Test authentication via STS getCallerIdentity")
@@ -54,10 +54,10 @@ cmd
   });
 
 cmd
-  .command('remove')
-  .description('Remove account IDs from AMI permissions')
-  .action(function(){
-    commandRmv.remove(cmd.loglevel)
+  .command("*")
+  .description("Invalid commands print help")
+  .action(function() {
+    cmd.help();
   });
 
 cmd.parse(process.argv);
