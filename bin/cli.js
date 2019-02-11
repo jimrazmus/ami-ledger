@@ -8,7 +8,7 @@ const cmd = require("commander");
 const log = require("loglevel");
 
 const amis = require("../src/amis.js");
-const cva = require("../src/command-validate-auth.js");
+const commandVal = require("../src/command-validate-auth.js");
 const commandAdd = require("../src/command-add.js");
 
 cmd
@@ -20,9 +20,8 @@ cmd
   .command('auth')
   .description('Test authentication via STS getCallerIdentity')
   .action(function(){
-    cva.confirmCreds(cmd.loglevel);
+    commandVal.confirmCreds(cmd.loglevel);
   });
-
 
 cmd
   .command('add')
