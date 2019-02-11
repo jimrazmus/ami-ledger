@@ -151,23 +151,33 @@ test("buildParams list4 list6", () => {
 });
 
 test("buildParams list1 list1", () => {
-  expect(amis.buildLaunchPermission(dummyAmiID, list1, list1, ALL)).toEqual(null);
+  expect(amis.buildLaunchPermission(dummyAmiID, list1, list1, ALL)).toEqual(
+    null
+  );
 });
 
 test("buildParams list2 list2", () => {
-  expect(amis.buildLaunchPermission(dummyAmiID, list2, list2, ALL)).toEqual(null);
+  expect(amis.buildLaunchPermission(dummyAmiID, list2, list2, ALL)).toEqual(
+    null
+  );
 });
 
 test("buildParams list3 list3", () => {
-  expect(amis.buildLaunchPermission(dummyAmiID, list3, list3, ALL)).toEqual(null);
+  expect(amis.buildLaunchPermission(dummyAmiID, list3, list3, ALL)).toEqual(
+    null
+  );
 });
 
 test("buildParams list4 list4", () => {
-  expect(amis.buildLaunchPermission(dummyAmiID, list4, list4, ALL)).toEqual(null);
+  expect(amis.buildLaunchPermission(dummyAmiID, list4, list4, ALL)).toEqual(
+    null
+  );
 });
 
 test("buildParams list5 list5", () => {
-  expect(amis.buildLaunchPermission(dummyAmiID, list5, list5, ALL)).toEqual(null);
+  expect(amis.buildLaunchPermission(dummyAmiID, list5, list5, ALL)).toEqual(
+    null
+  );
 });
 
 test("buildParams list6 list4", () => {
