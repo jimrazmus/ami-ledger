@@ -14,7 +14,7 @@ const commandRmv = require("../src/command-remove.js");
 const commandVal = require("../src/command-validate-auth.js");
 
 cmd
-  .description("it does stuff")
+  .description("configures AMI sharing (launchPermissions) to a list of account IDs ")
   .option(
     "-l, --loglevel <level>",
     "Set logging level {trace|debug|info|warn|error}",
