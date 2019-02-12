@@ -5,7 +5,7 @@ const log = require("loglevel");
 const amis = require("./amis.js");
 const flags = require("./flags.js");
 
-const flag = '';
+const flag = "";
 
 function doIt(logLevel) {
   log.setLevel(logLevel, true);
@@ -85,7 +85,7 @@ function processAmi(amiId, accts) {
   );
 }
 
-module.exports = { 
-    doIt: doIt,
-    flag
+module.exports = {
+  doIt: doIt,
+  flag
 };
