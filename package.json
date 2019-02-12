@@ -4,7 +4,7 @@
     "al": "./bin/cli.js"
   },
   "dependencies": {
-    "aws-sdk": "2.400.0",
+    "aws-sdk": "2.401.0",
     "commander": "2.19.0",
     "convict": "4.4.1",
     "dotenv": "6.2.0",
