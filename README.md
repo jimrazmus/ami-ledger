@@ -19,3 +19,24 @@
       full                    Both add and remove, account IDs to exactly match configuration
       remove                  Remove extra account IDs from AMI permissions
       *                       Invalid commands print help
+
+## AWS Permissions
+
+Here is a sample AWS policy that details the permissions necessary to run this program.
+
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "VisualEditor0",
+                "Effect": "Allow",
+                "Action": [
+                    "ec2:DescribeImages",
+                    "ec2:DescribeImageAttribute",
+                    "ec2:ModifyImageAttribute",
+                    "sts:GetCallerIdentity"
+                ],
+                "Resource": "*"
+            }
+        ]
+    }
