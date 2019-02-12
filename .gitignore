@@ -124,5 +124,4 @@ typings/
 # jest test output
 reports/
 
-.env
-.envrc
+.env*
