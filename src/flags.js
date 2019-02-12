@@ -20,7 +20,7 @@ function isRemoveSet(flag) {
 }
 
 function isAllSet(flag) {
-  if (flag & (ADD | REMOVE)) {
+  if (isAddSet(flag) && isRemoveSet(flag)) {
     return true;
   } else {
     return false;
