@@ -5,9 +5,11 @@ const log = require("loglevel");
 const amis = require("./amis.js");
 const flags = require("./flags.js");
 
-function add(logLevel) {
+const flag = "";
+
+function doIt(logLevel) {
   log.setLevel(logLevel, true);
-  log.trace("command-add.add");
+  log.trace("main.doIt");
   log.info("Environment Variables:\n" + JSON.stringify(process.env) + "\n");
 
   const cfg = require("../al.json");
@@ -55,7 +57,7 @@ function processAmi(amiId, accts) {
         amiId,
         launchPermissions,
         accts,
-        flags.ADD
+        flag
       );
       if (targetLaunchPermissions !== null) {
         const setLaunchPermissionsPromise = amis.setLaunchPermissions(
@@ -83,4 +85,7 @@ function processAmi(amiId, accts) {
   );
 }
 
-module.exports = { add: add };
+module.exports = {
+  doIt: doIt,
+  flag
+};

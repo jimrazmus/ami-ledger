@@ -5,13 +5,10 @@
 require("dotenv").config();
 
 const cmd = require("commander");
-const log = require("loglevel");
 
-const amis = require("../src/amis.js");
-const commandAdd = require("../src/command-add.js");
-const commandFull = require("../src/command-full.js");
-const commandRmv = require("../src/command-remove.js");
 const commandVal = require("../src/command-validate-auth.js");
+const flags = require("../src/flags.js");
+const main = require("../src/main.js");
 
 cmd
   .description(
@@ -36,7 +33,8 @@ cmd
   .command("add")
   .description("Add missing account IDs to AMI permissions")
   .action(function() {
-    commandAdd.add(cmd.loglevel);
+    main.flag = flags.ADD;
+    main.doIt(cmd.loglevel);
   });
 
 cmd
@@ -45,14 +43,16 @@ cmd
     "Both add and remove, account IDs to exactly match configuration"
   )
   .action(function() {
-    commandAdd.add(cmd.loglevel);
+    main.flag = flags.ADD | flags.REMOVE;
+    main.doIt(cmd.loglevel);
   });
 
 cmd
   .command("remove")
   .description("Remove extra account IDs from AMI permissions")
   .action(function() {
-    commandRmv.remove(cmd.loglevel);
+    main.flag = flags.REMOVE;
+    main.doIt(cmd.loglevel);
   });
 
 cmd
