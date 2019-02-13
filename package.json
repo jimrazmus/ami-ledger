@@ -3,6 +3,9 @@
   "bin": {
     "al": "./bin/cli.js"
   },
+  "bugs": {
+    "url": "https://github.com/jimrazmus/ami-ledger/issues"
+  },
   "dependencies": {
     "aws-sdk": "2.401.0",
     "commander": "2.19.0",
@@ -24,6 +27,7 @@
   "engines": {
     "node": ">=10.15.1"
   },
+  "homepage": "https://github.com/jimrazmus/ami-ledger",
   "jest": {
     "reporters": [
       "default",
@@ -41,6 +45,10 @@
   "license": "MIT",
   "name": "ami-ledger",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jimrazmus/ami-ledger"
+  },
   "scripts": {
     "clean": "rm -rf ./{coverage,reports}",
     "lint": "eslint --format junit --output-file ./reports/eslint/eslint.xml 'src/**/*.js'",
