@@ -11,9 +11,7 @@ const flags = require("../src/flags.js");
 const main = require("../src/main.js");
 
 cmd
-  .description(
-    "Manage AMI launch permissions"
-  )
+  .description("Manage AMI launch permissions")
   .option(
     "-l, --loglevel <level>",
     "Set logging level {trace|debug|info|warn|error}",
