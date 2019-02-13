@@ -1,12 +1,12 @@
 # ami-ledger
 
-[![CircleCI](https://circleci.com/gh/jimrazmus/ami-ledger/tree/master.svg?style=svg)](https://circleci.com/gh/jimrazmus/ami-ledger/tree/master) [![Known Vulnerabilities](https://snyk.io/test/github/jimrazmus/ami-ledger/badge.svg?targetFile=package.json)](https://snyk.io/test/github/jimrazmus/ami-ledger?targetFile=package.json) [![CodeCov](https://codecov.io/gh/jimrazmus/ami-ledger/branch/master/graph/badge.svg)](https://codecov.io/gh/jimrazmus/ami-ledger) [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=jimrazmus/ami-ledger)](https://dependabot.com)
+[![CircleCI](https://circleci.com/gh/jimrazmus/ami-ledger/tree/master.svg?style=svg)](https://circleci.com/gh/jimrazmus/ami-ledger/tree/master) [![Known Vulnerabilities](https://snyk.io/test/github/jimrazmus/ami-ledger/badge.svg?targetFile=package.json)](https://snyk.io/test/github/jimrazmus/ami-ledger?targetFile=package.json) [![CodeCov](https://codecov.io/gh/jimrazmus/ami-ledger/branch/master/graph/badge.svg)](https://codecov.io/gh/jimrazmus/ami-ledger) [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=jimrazmus/ami-ledger)](https://dependabot.com) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 ## Usage
 
     Usage: al [options] [command]
 
-    configures AMI sharing (launchPermissions) to a list of account IDs
+    Manage AMI launch permissions
 
     Options:
       -l, --loglevel <level>  Set logging level {trace|debug|info|warn|error} (default: "error")
@@ -40,3 +40,15 @@ Here is a sample AWS policy that details the permissions necessary to run this p
             }
         ]
     }
+
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Author
+
+Jim Razmus II
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
