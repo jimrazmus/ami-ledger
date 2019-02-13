@@ -12,7 +12,7 @@ const main = require("../src/main.js");
 
 cmd
   .description(
-    "configures AMI sharing (launchPermissions) to a list of account IDs "
+    "Manage AMI launch permissions"
   )
   .option(
     "-l, --loglevel <level>",
