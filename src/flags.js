@@ -3,34 +3,41 @@
 const ADD = 1 << 1;
 const REMOVE = 1 << 2;
 
-function isAddSet(flag) {
-  if (flag & ADD) {
+let _flag = 0;
+
+function isAddSet() {
+  if (_flag & ADD) {
     return true;
   } else {
     return false;
   }
 }
 
-function isRemoveSet(flag) {
-  if (flag & REMOVE) {
+function isRemoveSet() {
+  if (_flag & REMOVE) {
     return true;
   } else {
     return false;
   }
 }
 
-function isAllSet(flag) {
-  if (isAddSet(flag) && isRemoveSet(flag)) {
+function isAllSet() {
+  if (isAddSet(_flag) && isRemoveSet(_flag)) {
     return true;
   } else {
     return false;
   }
+}
+
+function setFlag(value) {
+  _flag = value;
 }
 
 module.exports = {
   isAddSet: isAddSet,
   isRemoveSet: isRemoveSet,
   isAllSet: isAllSet,
+  setFlag: setFlag,
   ADD,
   REMOVE
 };
