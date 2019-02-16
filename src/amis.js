@@ -61,7 +61,7 @@ async function setLaunchPermissions(params) {
   }
 }
 
-function buildLaunchPermission(ami_id, current, target, flag) {
+function buildLaunchPermission(ami_id, current, target) {
   log.trace("buildLaunchPermissions");
   const additions = target.filter(x => !current.includes(x));
   const removals = current.filter(x => !target.includes(x));
@@ -75,7 +75,7 @@ function buildLaunchPermission(ami_id, current, target, flag) {
     LaunchPermission: {}
   };
 
-  if (additions.length > 0 && flags.isAddSet(flag)) {
+  if (flags.isAddSet() && additions.length > 0) {
     const uniqAdditions = [...new Set(additions)];
     params.LaunchPermission.Add = [];
     uniqAdditions.forEach(element => {
@@ -85,7 +85,7 @@ function buildLaunchPermission(ami_id, current, target, flag) {
     });
   }
 
-  if (removals.length > 0 && flags.isRemoveSet(flag)) {
+  if (flags.isRemoveSet() && removals.length > 0) {
     const uniqRemovals = [...new Set(removals)];
     params.LaunchPermission.Remove = [];
     uniqRemovals.forEach(element => {

@@ -8,11 +8,6 @@ const os = require("os");
 const pqueue = require("p-queue");
 
 const amis = require("./amis.js");
-const flags = require("./flags.js");
-const schema = require("./schema.js");
-
-const flag = "";
-const pq = new pqueue({ concurrency: 10, intervalCap: 250, interval: 1000 });
 
 function doIt(logLevel) {
   log.setLevel(logLevel, true);
@@ -79,8 +74,7 @@ function processAmi(amiId, accts) {
       const targetLaunchPermissions = amis.buildLaunchPermission(
         amiId,
         launchPermissions,
-        accts,
-        flag
+        accts
       );
       if (
         ajv.validate(schema.modifyImageAttributeSchema, targetLaunchPermissions)
@@ -111,6 +105,5 @@ function processAmi(amiId, accts) {
 }
 
 module.exports = {
-  doIt: doIt,
-  flag
+  doIt: doIt
 };
