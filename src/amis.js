@@ -95,6 +95,10 @@ function buildLaunchPermission(ami_id, current, target) {
     });
   }
 
+  if (params.LaunchPermission === {}) {
+    return null;
+  }
+
   return params;
 }
 
