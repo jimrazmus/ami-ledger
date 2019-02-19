@@ -7,7 +7,7 @@
     "url": "https://github.com/jimrazmus/ami-ledger/issues"
   },
   "dependencies": {
-    "aws-sdk": "2.401.0",
+    "aws-sdk": "2.404.0",
     "commander": "2.19.0",
     "convict": "4.4.1",
     "dotenv": "6.2.0",
@@ -15,10 +15,10 @@
   },
   "description": "Manage AMI launch permissions",
   "devDependencies": {
-    "eslint": "5.13.0",
+    "eslint": "5.14.0",
     "eslint-config-prettier": "4.0.0",
     "jest": "24.1.0",
-    "jest-junit": "6.2.1",
+    "jest-junit": "6.3.0",
     "prettier": "1.16.4"
   },
   "directories": {
