@@ -7,7 +7,7 @@
     "url": "https://github.com/jimrazmus/ami-ledger/issues"
   },
   "dependencies": {
-    "aws-sdk": "2.404.0",
+    "aws-sdk": "2.405.0",
     "commander": "2.19.0",
     "convict": "4.4.1",
     "dotenv": "6.2.0",
