@@ -5,9 +5,9 @@ references:
   getcache: &getcache
     restore_cache:
       keys:
-        npm-packages-{{ .Branch }}-{{ checksum "package-lock.json" }}
-        npm-packages-{{ .Branch }}-
-        npm-packages-
+        - npm-packages-{{ .Branch }}-{{ checksum "package-lock.json" }}
+        - npm-packages-{{ .Branch }}-
+        - npm-packages-
 
   install_depends: &install_depends
     run:
