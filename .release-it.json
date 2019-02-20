@@ -1,0 +1,12 @@
+{
+    "scripts": {
+      "beforeStage": "npx auto-changelog",
+      "changelog": "npx auto-changelog --stdout --commit-limit false --unreleased"
+    },
+    "npm": {
+      "publish": false
+    },
+    "github": {
+      "release": true
+      }
+}
