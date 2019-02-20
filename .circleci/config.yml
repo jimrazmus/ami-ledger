@@ -27,17 +27,6 @@ references:
 
 jobs:
 
-  build:
-    <<: *container
-    steps:
-      - checkout
-      - *getcache
-      - *install_depends
-      - *putcache
-      - run:
-          Name: No-op
-          command: npm -v
-
   lint:
     <<: *container
     steps:
@@ -87,13 +76,11 @@ workflows:
   version: 2
   doit:
     jobs:
-      - build
       - lint
       - prettier
       - test_init:
           context: aws-dev
           requires:
-            - build
             - lint
             - prettier
       - test:
