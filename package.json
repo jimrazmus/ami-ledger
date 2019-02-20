@@ -15,7 +15,7 @@
   },
   "description": "Manage AMI launch permissions",
   "devDependencies": {
-    "eslint": "5.14.0",
+    "eslint": "5.14.1",
     "eslint-config-prettier": "4.0.0",
     "jest": "24.1.0",
     "jest-junit": "6.3.0",
