@@ -4,22 +4,21 @@ references:
 
   getcache: &getcache
     restore_cache:
-      paths:
-        - node_modules
-        - ~/.cache/yarn
-      key: yarn-packages-{{ checksum "yarn.lock" }}
+      keys:
+        - npm-packages-{{ .Branch }}-{{ checksum "package-lock.json" }}
+        - npm-packages-{{ .Branch }}-
+        - npm-packages-
 
   install_depends: &install_depends
     run:
       name: Install Dependencies
-      command: yarn install --frozen-lockfile --non-interactive --cache-folder ~/.cache/yarn 
+      command: npm install 
 
   putcache: &putcache
     save_cache:
       paths:
         - node_modules
-        - ~/.cache/yarn
-      key: yarn-packages-{{ checksum "yarn.lock" }}
+      key: npm-packages-{{ .Branch }}-{{ checksum "package-lock.json" }}
 
   container: &container
     docker:
@@ -27,17 +26,6 @@ references:
     working_directory: ~/ami-ledger
 
 jobs:
-
-  build:
-    <<: *container
-    steps:
-      - checkout
-      - *getcache
-      - *install_depends
-      - *putcache
-      - run:
-          Name: No-op
-          command: yarn --version
 
   lint:
     <<: *container
@@ -48,7 +36,7 @@ jobs:
       - *putcache
       - run:
           Name: Lint
-          command: yarn run lint
+          command: npm run lint
 
   prettier:
     <<: *container
@@ -59,7 +47,7 @@ jobs:
       - *putcache
       - run:
           name: Prettier
-          command: yarn run pretty-test
+          command: npm run pretty-test
 
   test:
     <<: *container
@@ -70,7 +58,7 @@ jobs:
       - *putcache
       - run:
           name: Jest testing
-          command: yarn run test
+          command: npm run test
       - store_test_results:
           path: reports/jest
       - run:
@@ -88,13 +76,11 @@ workflows:
   version: 2
   doit:
     jobs:
-      - build
       - lint
       - prettier
       - test_init:
           context: aws-dev
           requires:
-            - build
             - lint
             - prettier
       - test:
