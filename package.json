@@ -1,13 +1,13 @@
 {
   "author": "Jim Razmus II",
   "bin": {
-    "al": "./bin/cli.js"
+    "aam": "./bin/cli.js"
   },
   "bugs": {
-    "url": "https://github.com/jimrazmus/ami-ledger/issues"
+    "url": "https://github.com/jimrazmus/ami-access-manager/issues"
   },
   "dependencies": {
-    "aws-sdk": "2.406.0",
+    "aws-sdk": "2.409.0",
     "commander": "2.19.0",
     "convict": "4.4.1",
     "dotenv": "6.2.0",
@@ -27,7 +27,7 @@
   "engines": {
     "node": ">=10.15.1"
   },
-  "homepage": "https://github.com/jimrazmus/ami-ledger",
+  "homepage": "https://github.com/jimrazmus/ami-access-manager",
   "jest": {
     "reporters": [
       "default",
@@ -43,11 +43,11 @@
     "ami"
   ],
   "license": "MIT",
-  "name": "ami-ledger",
+  "name": "ami-access-manager",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/jimrazmus/ami-ledger"
+    "url": "https://github.com/jimrazmus/ami-access-manager"
   },
   "scripts": {
     "clean": "rm -rf ./{coverage,reports}",

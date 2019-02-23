@@ -23,7 +23,7 @@ references:
   container: &container
     docker:
       - image: circleci/node:10.15.1
-    working_directory: ~/ami-ledger
+    working_directory: ~/ami-access-manager
 
 jobs:
 
