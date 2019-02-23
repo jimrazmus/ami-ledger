@@ -1,10 +1,10 @@
-# ami-ledger
+# ami-access-manager
 
-[![CircleCI](https://circleci.com/gh/jimrazmus/ami-ledger/tree/master.svg?style=svg)](https://circleci.com/gh/jimrazmus/ami-ledger/tree/master) [![Known Vulnerabilities](https://snyk.io/test/github/jimrazmus/ami-ledger/badge.svg?targetFile=package.json)](https://snyk.io/test/github/jimrazmus/ami-ledger?targetFile=package.json) [![CodeCov](https://codecov.io/gh/jimrazmus/ami-ledger/branch/master/graph/badge.svg)](https://codecov.io/gh/jimrazmus/ami-ledger) [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=jimrazmus/ami-ledger)](https://dependabot.com) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+[![CircleCI](https://circleci.com/gh/jimrazmus/ami-access-manager/tree/master.svg?style=svg)](https://circleci.com/gh/jimrazmus/ami-access-manager/tree/master) [![Known Vulnerabilities](https://snyk.io/test/github/jimrazmus/ami-access-manager/badge.svg?targetFile=package.json)](https://snyk.io/test/github/jimrazmus/ami-access-manager?targetFile=package.json) [![CodeCov](https://codecov.io/gh/jimrazmus/ami-access-manager/branch/master/graph/badge.svg)](https://codecov.io/gh/jimrazmus/ami-access-manager) [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=jimrazmus/ami-access-manager)](https://dependabot.com) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 ## Usage
 
-    Usage: al [options] [command]
+    Usage: aam [options] [command]
 
     Manage AMI launch permissions
 
