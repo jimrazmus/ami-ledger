@@ -1,6 +1,11 @@
 # ami-access-manager
 
-[![CircleCI](https://circleci.com/gh/jimrazmus/ami-access-manager/tree/master.svg?style=svg)](https://circleci.com/gh/jimrazmus/ami-access-manager/tree/master) [![Known Vulnerabilities](https://snyk.io/test/github/jimrazmus/ami-access-manager/badge.svg?targetFile=package.json)](https://snyk.io/test/github/jimrazmus/ami-access-manager?targetFile=package.json) [![CodeCov](https://codecov.io/gh/jimrazmus/ami-access-manager/branch/master/graph/badge.svg)](https://codecov.io/gh/jimrazmus/ami-access-manager) [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=jimrazmus/ami-access-manager)](https://dependabot.com) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+[![CircleCI](https://circleci.com/gh/jimrazmus/ami-access-manager/tree/master.svg?style=svg)](https://circleci.com/gh/jimrazmus/ami-access-manager/tree/master)
+[![CodeCov](https://codecov.io/gh/jimrazmus/ami-access-manager/branch/master/graph/badge.svg)](https://codecov.io/gh/jimrazmus/ami-access-manager)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5985d326133248d483bd8d7e1105979a)](https://www.codacy.com/app/jim.razmus/ami-access-manager?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jimrazmus/ami-access-manager&amp;utm_campaign=Badge_Grade)
+[![Known Vulnerabilities](https://snyk.io/test/github/jimrazmus/ami-access-manager/badge.svg?targetFile=package.json)](https://snyk.io/test/github/jimrazmus/ami-access-manager?targetFile=package.json)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=jimrazmus/ami-access-manager)](https://dependabot.com)
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 ## Usage
 
