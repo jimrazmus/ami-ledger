@@ -4,4 +4,4 @@ curl --user $CIRCLECI_USER \
     --form revision=$CIRCLECI_COMMIT \
     --form config=@config.yml \
     --form notify=false \
-        https://circleci.com/api/v1.1/project/github/jimrazmus/ami-ledger/tree/master
+        https://circleci.com/api/v1.1/project/github/jimrazmus/ami-access-manager/tree/master
