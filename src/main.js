@@ -1,6 +1,8 @@
 "use strict";
 
 const log = require("loglevel");
+const Sentry = require('@sentry/node');
+Sentry.init({ dsn: 'https://23414b4d880d47bc83cc73d61f0092df@sentry.io/1400986' });
 
 const amis = require("./amis.js");
 const flags = require("./flags.js");
