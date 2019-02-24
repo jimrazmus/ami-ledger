@@ -1,11 +1,13 @@
 "use strict";
 
 const log = require("loglevel");
+const pqueue = require("p-queue");
 
 const amis = require("./amis.js");
 const flags = require("./flags.js");
 
 const flag = "";
+const pq = new pq({ concurrency: 100, intervalCap: 500, interval: 1000 });
 
 function doIt(logLevel) {
   log.setLevel(logLevel, true);
@@ -27,8 +29,7 @@ function loopOverJobs(jobs) {
 }
 
 function processJob(job) {
-  const amiIdsPromise = amis.fetchAmiIds(job.params);
-  amiIdsPromise.then(
+  pq.add(() => amis.fetchAmiIds(job.params)).then(
     function(amiIds) {
       if (!(amiIds.length > 0)) {
         return;
@@ -50,8 +51,7 @@ function loopOverAmiIds(amiIds, accts) {
 }
 
 function processAmi(amiId, accts) {
-  const fetchLaunchPermissionsPromise = amis.fetchLaunchPermissions(amiId);
-  fetchLaunchPermissionsPromise.then(
+  pq.add(() => amis.fetchLaunchPermissions(amiId)).then(
     function(launchPermissions) {
       const targetLaunchPermissions = amis.buildLaunchPermission(
         amiId,
