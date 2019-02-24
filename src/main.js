@@ -7,7 +7,7 @@ const amis = require("./amis.js");
 const flags = require("./flags.js");
 
 const flag = "";
-const pq = new pq({ concurrency: 100, intervalCap: 500, interval: 1000 });
+const pq = new pqueue({ concurrency: 100, intervalCap: 500, interval: 1000 });
 
 function doIt(logLevel) {
   log.setLevel(logLevel, true);
