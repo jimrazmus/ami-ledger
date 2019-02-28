@@ -57,5 +57,5 @@
     "pretty-test": "prettier --list-different \"{bin,src}/**/*.js\"",
     "test": "jest --ci --reporters=default --reporters=jest-junit --coverage"
   },
-  "version": "0.0.1"
+  "version": "0.1.0"
 }
