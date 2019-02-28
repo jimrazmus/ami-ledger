@@ -59,6 +59,7 @@
   "scripts": {
     "clean": "rm -rf ./{coverage,reports}",
     "lint": "eslint --format junit --output-file ./reports/eslint/eslint.xml 'src/**/*.js'",
+    "postversion": "git push && git push --tags",
     "pretty": "prettier --write \"{bin,src}/**/*.js\"",
     "pretty-test": "prettier --list-different \"{bin,src}/**/*.js\"",
     "test": "jest --ci --reporters=default --reporters=jest-junit --coverage",
