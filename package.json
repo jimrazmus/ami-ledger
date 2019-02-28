@@ -1,5 +1,10 @@
 {
   "author": "Jim Razmus II",
+  "auto-changelog": {
+    "template": "keepachangelog",
+    "unreleased": true,
+    "commitLimit": false
+  },
   "bin": {
     "aam": "./bin/cli.js"
   },
@@ -16,6 +21,7 @@
   },
   "description": "Manage AMI launch permissions",
   "devDependencies": {
+    "auto-changelog": "1.11.0",
     "eslint": "5.14.1",
     "eslint-config-prettier": "4.1.0",
     "jest": "24.1.0",
@@ -53,9 +59,11 @@
   "scripts": {
     "clean": "rm -rf ./{coverage,reports}",
     "lint": "eslint --format junit --output-file ./reports/eslint/eslint.xml 'src/**/*.js'",
+    "postversion": "git push && git push --tags",
     "pretty": "prettier --write \"{bin,src}/**/*.js\"",
     "pretty-test": "prettier --list-different \"{bin,src}/**/*.js\"",
-    "test": "jest --ci --reporters=default --reporters=jest-junit --coverage"
+    "test": "jest --ci --reporters=default --reporters=jest-junit --coverage",
+    "version": "auto-changelog -p && git add CHANGELOG.md"
   },
   "version": "0.0.1"
 }
