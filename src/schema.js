@@ -3,7 +3,6 @@
 const describeImagesSchema = {
   $schema: "http://json-schema.org/draft-07/schema#",
   additionalProperties: false,
-  id: "describeImages",
   minProperties: 1,
   properties: {
     DryRun: { type: "boolean" },
@@ -29,7 +28,6 @@ const describeImagesSchema = {
 const describeImageAttributeSchema = {
   $schema: "http://json-schema.org/draft-07/schema#",
   additionalProperties: false,
-  id: "describeImageAttribute",
   properties: {
     Attribute: { type: "string" },
     DryRun: { type: "boolean" },
@@ -52,7 +50,6 @@ const modifyImageAttributeSchema = {
       type: "object"
     }
   },
-  id: "modifyImageAttribute",
   minProperties: 2,
   properties: {
     Attribute: { type: "string" },
