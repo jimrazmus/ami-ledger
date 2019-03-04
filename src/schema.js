@@ -58,6 +58,7 @@ const modifyImageAttributeSchema = {
     ImageId: { type: "string" },
     LaunchPermission: {
       additionalProperties: false,
+      minProperties: 1,
       properties: {
         Add: {
           items: { $ref: "#/definitions/targetSpec" },
