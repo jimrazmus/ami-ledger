@@ -17,7 +17,7 @@
     "convict": "4.4.1",
     "dotenv": "6.2.0",
     "loglevel": "1.6.1",
-    "p-queue": "3.1.0"
+    "p-queue": "4.0.0"
   },
   "description": "Manage AMI launch permissions",
   "devDependencies": {
