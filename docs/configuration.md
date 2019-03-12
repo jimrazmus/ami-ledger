@@ -1,10 +1,14 @@
 # Configuration
 
-AMI Access Manager(aam) configuration syntax defines the work the program will do.
+AMI Access Manager (aam) configuration syntax defines the work the program will do. The configuration is stored in a file named "aam.json". The following directories are searched with the first match winning:
+
+* current working directory (./aam.json) 
+* users home directory ($HOME/aam.json)
+* system configuration directory (/etc/aam.json)
 
 ## Jobs
 
-Configuration is provided as a JSON object. It begins with a "jobs" array containing one or more job objects. Each job object combines a "query" with a list of "accounts". For example:
+Configuration is provided as a JSON object. It begins with a jobs array containing one or more job objects. Each job object combines a query with a list of accounts. For example:
 
     {
         "jobs": [
@@ -22,7 +26,7 @@ Configuration is provided as a JSON object. It begins with a "jobs" array contai
         ]
     }
 
-*BEWARE:* Query objects must be mutually exclusive when running the "full" command, unless the lists of accounts match. You will get non-deterministic results if the account lists do not match.
+**BEWARE:** Query objects must be mutually exclusive when running the *full* command, unless the lists of accounts match. You will get non-deterministic results if the account lists do not match.
 
 ### Query
 
@@ -48,4 +52,4 @@ One or more Amazon account IDs are used to mutate the launch permissions of an A
         "111111111111"
     ]
 
-The accounts listed may be added, removed, or explictly set depending on how the program is run.
+The accounts listed may be added, removed, or explicitly set depending on how the program is run.

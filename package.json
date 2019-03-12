@@ -12,6 +12,7 @@
     "url": "https://github.com/jimrazmus/ami-access-manager/issues"
   },
   "dependencies": {
+    "ajv": "6.9.2",
     "aws-sdk": "2.418.0",
     "commander": "2.19.0",
     "convict": "4.4.1",
