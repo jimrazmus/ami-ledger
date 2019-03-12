@@ -66,5 +66,5 @@
     "test": "jest --ci --reporters=default --reporters=jest-junit --coverage",
     "version": "auto-changelog -p && git add CHANGELOG.md"
   },
-  "version": "0.2.0"
+  "version": "0.3.0"
 }
