@@ -7,6 +7,23 @@
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=jimrazmus/ami-access-manager)](https://dependabot.com)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
+## Summary
+
+Easily manage the launch permissions on thousands of your Amazon Machine Images (AMI). You define the queries that identify your AMIs along with the list of account IDs that should have launch permissions and AMI Access Manager will make it happen.
+
+## Documentation
+
+Detailed documentation is available at [https://jimrazmus.github.io/ami-access-manager/](https://jimrazmus.github.io/ami-access-manager/)
+
+## Install
+
+    #> npm install -g @jimrazmus/ami-access-manager
+
+## Setup
+
+1. Confirm you have the appropriate [Amazon permissions](https://jimrazmus.github.io/ami-access-manager/)
+1. Create a [configuration file](https://jimrazmus.github.io/ami-access-manager/)
+
 ## Usage
 
     Usage: aam [options] [command]
@@ -24,27 +41,6 @@
       full                    Both add and remove, account IDs to exactly match configuration
       remove                  Remove extra account IDs from AMI permissions
       *                       Invalid commands print help
-
-## AWS Permissions
-
-Here is a sample AWS policy that details the permissions necessary to run this program.
-
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Sid": "VisualEditor0",
-                "Effect": "Allow",
-                "Action": [
-                    "ec2:DescribeImages",
-                    "ec2:DescribeImageAttribute",
-                    "ec2:ModifyImageAttribute",
-                    "sts:GetCallerIdentity"
-                ],
-                "Resource": "*"
-            }
-        ]
-    }
 
 ## Contributing
 
