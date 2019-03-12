@@ -2,7 +2,9 @@
 
 const Ajv = require("ajv");
 const ajv = Ajv({ allErrors: true });
+const fs = require("fs");
 const log = require("loglevel");
+const os = require("os");
 const pqueue = require("p-queue");
 
 const amis = require("./amis.js");
@@ -17,7 +19,18 @@ function doIt(logLevel) {
   log.trace("main.doIt");
   log.info("Environment Variables:\n" + JSON.stringify(process.env) + "\n");
 
-  const cfg = require("../aam.json");
+  var cfg = "";
+
+  if (fs.existsSync("./aam.json")) {
+    cfg = JSON.parse(fs.readFileSync("./aam.json"));
+  } else if (fs.existsSync(os.homedir() + "/aam.json")) {
+    cfg = JSON.parse(fs.readFileSync(os.homedir() + "/aam.json"));
+  } else if (fs.existsSync("/etc/aam.json")) {
+    cfg = JSON.parse(fs.readFileSync("/etc/aam.json"));
+  } else {
+    log.warn("No valid configuration file found.");
+    process.exit(1);
+  }
 
   log.info("Configuration File Contents:\n" + JSON.stringify(cfg) + "\n");
 
@@ -69,7 +82,9 @@ function processAmi(amiId, accts) {
         accts,
         flag
       );
-      if (ajv.validate(schema.modifyImageAttributeSchema, targetLaunchPermissions)) {
+      if (
+        ajv.validate(schema.modifyImageAttributeSchema, targetLaunchPermissions)
+      ) {
         const setLaunchPermissionsPromise = amis.setLaunchPermissions(
           targetLaunchPermissions
         );
