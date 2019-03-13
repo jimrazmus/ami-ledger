@@ -35,6 +35,10 @@
   "engines": {
     "node": ">=10.15.1"
   },
+  "files": [
+    "bin",
+    "src/*.js"
+  ],
   "homepage": "https://github.com/jimrazmus/ami-access-manager",
   "jest": {
     "reporters": [
