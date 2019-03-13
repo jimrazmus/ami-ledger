@@ -15,7 +15,6 @@
     "ajv": "6.9.2",
     "aws-sdk": "2.420.0",
     "commander": "2.19.0",
-    "convict": "4.4.1",
     "dotenv": "6.2.0",
     "loglevel": "1.6.1",
     "p-queue": "4.0.0"
@@ -27,7 +26,8 @@
     "eslint-config-prettier": "4.1.0",
     "jest": "24.5.0",
     "jest-junit": "6.3.0",
-    "prettier": "1.16.4"
+    "prettier": "1.16.4",
+    "release-it": "10.3.1"
   },
   "directories": {
     "test": "test"
@@ -35,6 +35,10 @@
   "engines": {
     "node": ">=10.15.1"
   },
+  "files": [
+    "bin",
+    "src/*.js"
+  ],
   "homepage": "https://github.com/jimrazmus/ami-access-manager",
   "jest": {
     "reporters": [
@@ -51,14 +55,13 @@
     "ami"
   ],
   "license": "MIT",
-  "name": "ami-access-manager",
-  "private": true,
+  "name": "@jimrazmus/ami-access-manager",
   "repository": {
     "type": "git",
     "url": "https://github.com/jimrazmus/ami-access-manager"
   },
   "scripts": {
-    "clean": "rm -rf ./{coverage,reports}",
+    "clean": "rm -rf ./{coverage,node_modules,reports}",
     "lint": "eslint --format junit --output-file ./reports/eslint/eslint.xml 'src/**/*.js'",
     "postversion": "git push && git push --tags",
     "pretty": "prettier --write \"{bin,src}/**/*.js\"",
