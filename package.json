@@ -61,7 +61,7 @@
     "url": "https://github.com/jimrazmus/ami-access-manager"
   },
   "scripts": {
-    "clean": "rm -rf ./{coverage,reports}",
+    "clean": "rm -rf ./{coverage,node_modules,reports}",
     "lint": "eslint --format junit --output-file ./reports/eslint/eslint.xml 'src/**/*.js'",
     "postversion": "git push && git push --tags",
     "pretty": "prettier --write \"{bin,src}/**/*.js\"",
