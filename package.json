@@ -26,8 +26,7 @@
     "eslint-config-prettier": "4.1.0",
     "jest": "24.5.0",
     "jest-junit": "6.3.0",
-    "prettier": "1.16.4",
-    "release-it": "10.3.1"
+    "prettier": "1.16.4"
   },
   "directories": {
     "test": "test"
@@ -67,7 +66,7 @@
     "pretty": "prettier --write \"{bin,src}/**/*.js\"",
     "pretty-test": "prettier --list-different \"{bin,src}/**/*.js\"",
     "test": "jest --ci --reporters=default --reporters=jest-junit --coverage",
-    "version": "auto-changelog -p && git add CHANGELOG.md"
+    "version": "auto-changelog -p -t keepachangelog && git add CHANGELOG.md"
   },
-  "version": "0.3.0"
+  "version": "0.3.1"
 }
