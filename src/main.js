@@ -8,11 +8,9 @@ const os = require("os");
 const pqueue = require("p-queue");
 
 const amis = require("./amis.js");
-const flags = require("./flags.js");
-const schema = require("./schema.js");
+const schema = require("./schema");
 
-const flag = "";
-const pq = new pqueue({ concurrency: 10, intervalCap: 250, interval: 1000 });
+const pq = new pqueue({ concurrency: 5, intervalCap: 100, interval: 1000 });
 
 function doIt(logLevel) {
   log.setLevel(logLevel, true);
@@ -67,8 +65,8 @@ function processJob(job) {
 }
 
 function loopOverAmiIds(amiIds, accts) {
+  log.debug("loopOverAmiIds");
   amiIds.forEach(function(amiId) {
-    log.debug("loopOverAmiIds");
     processAmi(amiId, accts);
   });
 }
@@ -93,7 +91,7 @@ function processAmi(amiId, accts) {
             log.info(
               "Set " +
                 amiId +
-                " perimissions to " +
+                " permissions to " +
                 JSON.stringify(targetLaunchPermissions) +
                 "\n"
             );
@@ -102,10 +100,12 @@ function processAmi(amiId, accts) {
             log.error("setLaunchPermissions Error:\n" + err);
           }
         );
+      } else {
+        log.trace("schema didn't validate:" + JSON.stringify(targetLaunchPermissions));
       }
     },
     function(err) {
-      log.error("fetchLaunchPermissions Error:\n" + err);
+      log.error("fetchLaunchPermissions Error:\n" + err + "\n" + targetLaunchPermissions + "\n");
     }
   );
 }

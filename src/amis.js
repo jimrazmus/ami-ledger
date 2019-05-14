@@ -18,6 +18,7 @@ async function fetchAmiIds(params) {
 
     data.Images.forEach(image => {
       imageIds.push(image.ImageId);
+      log.trace("AMI:" + image.ImageId + "-" + image.Name + "\n");
     });
 
     return imageIds;
@@ -42,6 +43,8 @@ async function fetchLaunchPermissions(ami_id) {
       userIds.push(launchPermission.UserId);
     });
 
+    log.trace(userIds.sort());
+    
     return userIds;
   } catch (err) {
     log.error(err);
@@ -52,6 +55,7 @@ async function fetchLaunchPermissions(ami_id) {
 async function setLaunchPermissions(params) {
   try {
     log.trace("setLaunchPermissions");
+    log.trace(JSON.stringify(params));
     const ec2 = new AWS.EC2();
     const data = await ec2.modifyImageAttribute(params).promise();
     return true;
@@ -63,8 +67,13 @@ async function setLaunchPermissions(params) {
 
 function buildLaunchPermission(ami_id, current, target, flag) {
   log.trace("buildLaunchPermissions");
-  const additions = target.filter(x => !current.includes(x));
-  const removals = current.filter(x => !target.includes(x));
+  log.info(ami_id);
+  const additions = [...new Set(target.filter(x => !current.includes(x)))];
+  const removals = [...new Set(current.filter(x => !target.includes(x)))];
+  log.trace("current\n" + current);
+  log.trace("target\n" + target);
+  log.trace("additions:" + additions.length + "\n" + additions);
+  log.trace("removals:" + removals.length + "\n" + removals);
 
   if (additions.length === 0 && removals.length === 0) {
     return null;
@@ -75,20 +84,18 @@ function buildLaunchPermission(ami_id, current, target, flag) {
     LaunchPermission: {}
   };
 
-  if (additions.length > 0 && flags.isAddSet(flag)) {
-    const uniqAdditions = [...new Set(additions)];
+  if (flags.isAddSet() && additions.length > 0) {
     params.LaunchPermission.Add = [];
-    uniqAdditions.forEach(element => {
+    additions.forEach(element => {
       params.LaunchPermission.Add.push({
         UserId: element
       });
     });
   }
 
-  if (removals.length > 0 && flags.isRemoveSet(flag)) {
-    const uniqRemovals = [...new Set(removals)];
+  if (flags.isRemoveSet() && removals.length > 0) {
     params.LaunchPermission.Remove = [];
-    uniqRemovals.forEach(element => {
+    removals.forEach(element => {
       params.LaunchPermission.Remove.push({
         UserId: element
       });
