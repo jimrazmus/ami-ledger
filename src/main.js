@@ -8,8 +8,10 @@ const os = require("os");
 const pqueue = require("p-queue");
 
 const amis = require("./amis.js");
-const schema = require("./schema");
+const flags = require("./flags.js");
+const schema = require("./schema.js");
 
+const flag = null;
 const pq = new pqueue({ concurrency: 5, intervalCap: 100, interval: 1000 });
 
 function doIt(logLevel) {
