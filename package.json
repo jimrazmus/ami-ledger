@@ -16,7 +16,7 @@
     "aws-sdk": "2.441.0",
     "commander": "2.20.0",
     "dotenv": "7.0.0",
-    "loglevel": "1.6.1",
+    "loglevel": "1.6.2",
     "p-queue": "5.0.0"
   },
   "description": "Manage AMI launch permissions",
