@@ -69,7 +69,7 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
 
-  test_init:
+  test_create:
     docker:
       - image: jimrazmus/awscli
     steps:
@@ -89,13 +89,26 @@ jobs:
           paths:
             - json
 
+  test_destroy:
+    docker:
+      - image: jimrazmus/awscli
+    steps:
+      - attach_workspace:
+          at: ~/ami-access-manager
+      - run:
+          command: |
+            AMI=$(cat /tmp/json/ami-id.json | jq -r '.ImageId')
+            aws ec2 deregister-image --image-id $AMI
+            SNAP=$(cat /tmp/json/snapshot.json | jq -r '.SnapshotId')
+            aws ec2 delete-snapshot --snapshot-id $SNAP
+
 workflows:
   version: 2
   doit:
     jobs:
       - lint
       - prettier
-      - test_init:
+      - test_create:
           context: aws-dev
           requires:
             - lint
@@ -104,3 +117,7 @@ workflows:
           context: aws-dev
           requires:
             - test_init
+      - test_destroy:
+          context: aws-dev
+          requires:
+            - test
