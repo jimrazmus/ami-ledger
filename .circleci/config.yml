@@ -116,7 +116,7 @@ workflows:
       - test:
           context: aws-dev
           requires:
-            - test_init
+            - test_create
       - test_destroy:
           context: aws-dev
           requires:
