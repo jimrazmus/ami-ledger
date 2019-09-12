@@ -5,7 +5,7 @@ const ajv = Ajv({ allErrors: true });
 const fs = require("fs");
 const log = require("loglevel");
 const os = require("os");
-const {default: PQueue} = require("p-queue");
+const { default: PQueue } = require("p-queue");
 
 const amis = require("./amis.js");
 const flags = require("./flags.js");
@@ -13,7 +13,7 @@ const schema = require("./schema.js");
 const util = require('util')
 
 let flag = "";
-const pq = new PQueue({ concurrency: 5, intervalCap: 200, interval: 1000 });
+const pq = new PQueue({ concurrency: 10, intervalCap: 250, interval: 1000 });
 
 function setFlag(val) {
   flag = val
