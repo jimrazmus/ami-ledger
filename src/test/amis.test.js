@@ -6,7 +6,7 @@ const flags = require("../flags.js");
 const ALL = flags.ADD | flags.REMOVE;
 
 const awsAcctId = process.env.AWS_ACCT_ID;
-const dummyAmiID = process.env.DUMMY_AMI_ID;
+const dummyAmiID = process.env.TEST_AMI_ID;
 const list1 = [awsAcctId];
 const list2 = [awsAcctId, "123456789012", "234567890123"];
 const list3 = [awsAcctId, "234567890123", "345678901234"];

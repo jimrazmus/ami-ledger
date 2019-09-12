@@ -58,19 +58,36 @@ jobs:
       - *putcache
       - run:
           name: Jest testing
-          command: npm run test
+          command: |
+            TEST_AMI_ID=$(cat /tmp/json/ami-id.json | jq -r '.ImageId')
+            npm run test
       - store_test_results:
           path: reports/jest
       - run:
           name: Upload to CodeCov.io
           command: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+      - attach_workspace:
+          at: /tmp/workspace
 
   test_init:
     docker:
       - image: jimrazmus/awscli
     steps:
-      - run: aws ec2 reset-image-attribute --image-id $DUMMY_AMI_ID --attribute launchPermission
-      - run: aws ec2 modify-image-attribute --image-id $DUMMY_AMI_ID --launch-permission "Add=[{UserId=$AWS_ACCT_ID}]"
+      - attach_workspace:
+          at: ~/ami-access-manager
+      - run:
+          command: |
+            mkdir /tmp/json
+            aws ec2 copy-image --source-image-id $DUMMY_AMI_ID --source-region us-east-1 --region us-east-1 --name $CIRCLE_WORKFLOW_JOB_ID | jq -r '.ImageId' > /tmp/json/ami-id.json
+            AMI=$(cat /tmp/json/ami-id.json | jq -r '.ImageId')
+            aws ec2 reset-image-attribute --image-id $AMI --attribute launchPermission
+            aws ec2 modify-image-attribute --image-id $AMI --launch-permission "Add=[{UserId=$AWS_ACCT_ID}]"
+            aws ec2 describe-image --image-ids ${AMI} | jq —r '.Images[].BlockDeviceMappings[].Ebs.SnapshotId' > /tmp/json/snapshot.json
+            cat /tmp/json/snapshot.json
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - json
 
 workflows:
   version: 2
