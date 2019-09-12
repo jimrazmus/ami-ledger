@@ -5,7 +5,7 @@ const ajv = Ajv({ allErrors: true });
 const fs = require("fs");
 const log = require("loglevel");
 const os = require("os");
-const {default: PQueue} = require("p-queue");
+const { default: PQueue } = require("p-queue");
 
 const amis = require("./amis.js");
 const flags = require("./flags.js");
