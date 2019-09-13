@@ -59,7 +59,7 @@ jobs:
       - run:
           name: Jest testing
           command: |
-            TEST_AMI_ID=$(cat /tmp/json/ami-id.json | jq -r '.ImageId')
+            TEST_AMI_ID=$(cat /tmp/json/ami-id.txt)
             npm run test
       - store_test_results:
           path: reports/jest
@@ -78,17 +78,17 @@ jobs:
       - run:
           name: Wait for Image Availability
           command: |
-            mkdir /tmp/json
-            aws ec2 copy-image --source-image-id $DUMMY_AMI_ID --source-region us-east-1 --region us-east-1 --name $CIRCLE_WORKFLOW_JOB_ID | jq -r '.ImageId' > /tmp/json/ami-id.json
-            AMI=$(cat /tmp/json/ami-id.json | jq -r '.ImageId')
+            mkdir -p /tmp/json
+            aws ec2 copy-image --source-image-id $DUMMY_AMI_ID --source-region us-east-1 --region us-east-1 --name $CIRCLE_WORKFLOW_JOB_ID | jq -r '.ImageId' > /tmp/json/ami-id.txt
+            AMI=$(cat /tmp/json/ami-id.txt)
             aws ec2 wait image-available --image-ids $AMI
       - run:
           name: Initialize Image Permissions
           command: |
             aws ec2 reset-image-attribute --image-id $AMI --attribute launchPermission
             aws ec2 modify-image-attribute --image-id $AMI --launch-permission "Add=[{UserId=$AWS_ACCT_ID}]"
-            aws ec2 describe-image --image-ids ${AMI} | jq —r '.Images[].BlockDeviceMappings[].Ebs.SnapshotId' > /tmp/json/snapshot.json
-            cat /tmp/json/snapshot.json
+            aws ec2 describe-images --image-ids ${AMI} | jq —r '.Images[0].BlockDeviceMappings[0].Ebs.SnapshotId' > /tmp/json/snapshot.txt
+            cat /tmp/json/snapshot.txt
       - persist_to_workspace:
           root: /tmp
           paths:
@@ -102,9 +102,9 @@ jobs:
           at: ~/ami-access-manager
       - run:
           command: |
-            AMI=$(cat /tmp/json/ami-id.json | jq -r '.ImageId')
+            AMI=$(cat /tmp/json/ami-id.txt)
             aws ec2 deregister-image --image-id $AMI
-            SNAP=$(cat /tmp/json/snapshot.json | jq -r '.SnapshotId')
+            SNAP=$(cat /tmp/json/snapshot.txt)
             aws ec2 delete-snapshot --snapshot-id $SNAP
 
 workflows:
