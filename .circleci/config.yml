@@ -85,6 +85,7 @@ jobs:
       - run:
           name: Initialize Image Permissions
           command: |
+            AMI=$(cat /tmp/json/ami-id.txt)
             aws ec2 reset-image-attribute --image-id $AMI --attribute launchPermission
             aws ec2 modify-image-attribute --image-id $AMI --launch-permission "Add=[{UserId=$AWS_ACCT_ID}]"
             aws ec2 describe-images --image-ids ${AMI} | jq —r '.Images[0].BlockDeviceMappings[0].Ebs.SnapshotId' > /tmp/json/snapshot.txt
@@ -101,9 +102,13 @@ jobs:
       - attach_workspace:
           at: ~/ami-access-manager
       - run:
+          name: Deregister Image
           command: |
             AMI=$(cat /tmp/json/ami-id.txt)
             aws ec2 deregister-image --image-id $AMI
+      - run:
+          name: Delete Snapshot
+          command: |
             SNAP=$(cat /tmp/json/snapshot.txt)
             aws ec2 delete-snapshot --snapshot-id $SNAP
 
