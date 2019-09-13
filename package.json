@@ -14,7 +14,7 @@
   "dependencies": {
     "ajv": "6.10.2",
     "aws-sdk": "2.528.0",
-    "commander": "3.0.0",
+    "commander": "3.0.1",
     "dotenv": "8.1.0",
     "loglevel": "1.6.3",
     "p-queue": "6.1.1"
