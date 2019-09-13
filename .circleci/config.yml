@@ -76,10 +76,15 @@ jobs:
       - attach_workspace:
           at: ~/ami-access-manager
       - run:
+          name: Wait for Image Availability
           command: |
             mkdir /tmp/json
             aws ec2 copy-image --source-image-id $DUMMY_AMI_ID --source-region us-east-1 --region us-east-1 --name $CIRCLE_WORKFLOW_JOB_ID | jq -r '.ImageId' > /tmp/json/ami-id.json
             AMI=$(cat /tmp/json/ami-id.json | jq -r '.ImageId')
+            aws ec2 wait image-available --image-ids $AMI
+      - run:
+          name: Initialize Image Permissions
+          command: |
             aws ec2 reset-image-attribute --image-id $AMI --attribute launchPermission
             aws ec2 modify-image-attribute --image-id $AMI --launch-permission "Add=[{UserId=$AWS_ACCT_ID}]"
             aws ec2 describe-image --image-ids ${AMI} | jq —r '.Images[].BlockDeviceMappings[].Ebs.SnapshotId' > /tmp/json/snapshot.json
