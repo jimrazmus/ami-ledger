@@ -10,13 +10,13 @@ const { default: PQueue } = require("p-queue");
 const amis = require("./amis.js");
 const flags = require("./flags.js");
 const schema = require("./schema.js");
-const util = require('util')
+const util = require("util");
 
 let flag = "";
 const pq = new PQueue({ concurrency: 10, intervalCap: 250, interval: 1000 });
 
 function setFlag(val) {
-  flag = val
+  flag = val;
 }
 
 function doIt(logLevel) {
@@ -107,9 +107,12 @@ function processAmi(amiId, accts) {
             log.error("setLaunchPermissions Error:\n" + err);
           }
         );
-      }
-      else {
-        log.error(`Invalid launch permision request ${util.inspect(ajv.errors)}. Launch permssions ${util.inspect(targetLaunchPermissions)}`)
+      } else {
+        log.error(
+          `Invalid launch permision request ${util.inspect(
+            ajv.errors
+          )}. Launch permssions ${util.inspect(targetLaunchPermissions)}`
+        );
       }
     },
     function(err) {
