@@ -98,7 +98,7 @@ function processAmi(amiId, accts) {
             log.info(
               "Set " +
                 amiId +
-                " perimissions to " +
+                " permissions to " +
                 JSON.stringify(targetLaunchPermissions) +
                 "\n"
             );
@@ -109,9 +109,9 @@ function processAmi(amiId, accts) {
         );
       } else {
         log.error(
-          `Invalid launch permision request ${util.inspect(
+          `Invalid launch permission request:\n${util.inspect(
             ajv.errors
-          )}. Launch permssions ${util.inspect(targetLaunchPermissions)}`
+          )}\nLaunch permissions ${util.inspect(targetLaunchPermissions)}`
         );
       }
     },
