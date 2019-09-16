@@ -5,9 +5,19 @@ const ajv = Ajv({ allErrors: true });
 const fs = require("fs");
 const log = require("loglevel");
 const os = require("os");
-const pqueue = require("p-queue");
+const { default: PQueue } = require("p-queue");
 
 const amis = require("./amis.js");
+const flags = require("./flags.js");
+const schema = require("./schema.js");
+const util = require("util");
+
+let flag = "";
+const pq = new PQueue({ concurrency: 10, intervalCap: 250, interval: 1000 });
+
+function setFlag(val) {
+  flag = val;
+}
 
 function doIt(logLevel) {
   log.setLevel(logLevel, true);
@@ -96,6 +106,12 @@ function processAmi(amiId, accts) {
             log.error("setLaunchPermissions Error:\n" + err);
           }
         );
+      } else {
+        log.error(
+          `Invalid launch permision request ${util.inspect(
+            ajv.errors
+          )}. Launch permssions ${util.inspect(targetLaunchPermissions)}`
+        );
       }
     },
     function(err) {
@@ -105,5 +121,6 @@ function processAmi(amiId, accts) {
 }
 
 module.exports = {
-  doIt: doIt
+  doIt: doIt,
+  setFlag: setFlag
 };

@@ -31,7 +31,7 @@ cmd
   .command("add")
   .description("Add missing account IDs to AMI permissions")
   .action(function() {
-    flags.setFlag(flags.ADD);
+    main.setFlag(flags.ADD);
     main.doIt(cmd.loglevel);
   });
 
@@ -41,7 +41,7 @@ cmd
     "Both add and remove, account IDs to exactly match configuration"
   )
   .action(function() {
-    flags.setFlag(flags.ADD | flags.REMOVE);
+    main.setFlag(flags.ADD | flags.REMOVE);
     main.doIt(cmd.loglevel);
   });
 
@@ -49,7 +49,7 @@ cmd
   .command("remove")
   .description("Remove extra account IDs from AMI permissions")
   .action(function() {
-    flags.setFlag(flags.REMOVE);
+    main.setFlag(flags.REMOVE);
     main.doIt(cmd.loglevel);
   });
 
