@@ -13,7 +13,7 @@ const schema = require("./schema.js");
 const util = require("util");
 
 let flag = "";
-const pq = new PQueue({ concurrency: 10, intervalCap: 250, interval: 1000 });
+const pq = new PQueue({ concurrency: 5, intervalCap: 200, interval: 1000 });
 
 function setFlag(val) {
   flag = val;
