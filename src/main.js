@@ -87,7 +87,9 @@ function processAmi(amiId, accts) {
         accts,
         flag
       );
-      if (
+      if (targetLaunchPermissions === null) {
+        return;
+      } else if (
         ajv.validate(schema.modifyImageAttributeSchema, targetLaunchPermissions)
       ) {
         const setLaunchPermissionsPromise = amis.setLaunchPermissions(
