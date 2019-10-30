@@ -21,7 +21,7 @@
   },
   "description": "Manage AMI launch permissions",
   "devDependencies": {
-    "auto-changelog": "1.16.1",
+    "auto-changelog": "1.16.2",
     "eslint": "6.5.1",
     "eslint-config-prettier": "6.4.0",
     "jest": "24.9.0",
