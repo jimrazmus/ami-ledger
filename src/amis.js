@@ -16,7 +16,7 @@ async function fetchAmiIds(params) {
     const data = await ec2.describeImages(params).promise();
     const imageIds = [];
 
-    data.Images.forEach(image => {
+    data.Images.forEach((image) => {
       imageIds.push(image.ImageId);
     });
 
@@ -33,12 +33,12 @@ async function fetchLaunchPermissions(ami_id) {
     const ec2 = new AWS.EC2();
     const params = {
       Attribute: "launchPermission",
-      ImageId: ami_id
+      ImageId: ami_id,
     };
     const data = await ec2.describeImageAttribute(params).promise();
     const userIds = [];
 
-    data.LaunchPermissions.forEach(launchPermission => {
+    data.LaunchPermissions.forEach((launchPermission) => {
       userIds.push(launchPermission.UserId);
     });
 
@@ -63,8 +63,8 @@ async function setLaunchPermissions(params) {
 
 function buildLaunchPermission(ami_id, current, target, flag) {
   log.trace("buildLaunchPermissions");
-  const additions = target.filter(x => !current.includes(x));
-  const removals = current.filter(x => !target.includes(x));
+  const additions = target.filter((x) => !current.includes(x));
+  const removals = current.filter((x) => !target.includes(x));
 
   if (additions.length === 0 && removals.length === 0) {
     return null;
@@ -72,15 +72,15 @@ function buildLaunchPermission(ami_id, current, target, flag) {
 
   const params = {
     ImageId: ami_id,
-    LaunchPermission: {}
+    LaunchPermission: {},
   };
 
   if (additions.length > 0 && flags.isAddSet(flag)) {
     const uniqAdditions = [...new Set(additions)];
     params.LaunchPermission.Add = [];
-    uniqAdditions.forEach(element => {
+    uniqAdditions.forEach((element) => {
       params.LaunchPermission.Add.push({
-        UserId: element
+        UserId: element,
       });
     });
   }
@@ -88,9 +88,9 @@ function buildLaunchPermission(ami_id, current, target, flag) {
   if (removals.length > 0 && flags.isRemoveSet(flag)) {
     const uniqRemovals = [...new Set(removals)];
     params.LaunchPermission.Remove = [];
-    uniqRemovals.forEach(element => {
+    uniqRemovals.forEach((element) => {
       params.LaunchPermission.Remove.push({
-        UserId: element
+        UserId: element,
       });
     });
   }
@@ -106,5 +106,5 @@ module.exports = {
   buildLaunchPermission: buildLaunchPermission,
   fetchAmiIds: fetchAmiIds,
   fetchLaunchPermissions: fetchLaunchPermissions,
-  setLaunchPermissions: setLaunchPermissions
+  setLaunchPermissions: setLaunchPermissions,
 };

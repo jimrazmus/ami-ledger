@@ -43,7 +43,7 @@ function doIt(logLevel) {
 }
 
 function loopOverJobs(jobs) {
-  jobs.forEach(function(job) {
+  jobs.forEach(function (job) {
     log.debug("JOB:\n" + JSON.stringify(job));
     if (ajv.validate(schema.describeImagesSchema, job.query)) {
       processJob(job);
@@ -58,21 +58,21 @@ function loopOverJobs(jobs) {
 
 function processJob(job) {
   pq.add(() => amis.fetchAmiIds(job.query)).then(
-    function(amiIds) {
+    function (amiIds) {
       if (!(amiIds.length > 0)) {
         return;
       } else {
         loopOverAmiIds(amiIds, job.accounts);
       }
     },
-    function(err) {
+    function (err) {
       log.error("processJob Error:\n" + err);
     }
   );
 }
 
 function loopOverAmiIds(amiIds, accts) {
-  amiIds.forEach(function(amiId) {
+  amiIds.forEach(function (amiId) {
     log.debug("loopOverAmiIds");
     processAmi(amiId, accts);
   });
@@ -80,7 +80,7 @@ function loopOverAmiIds(amiIds, accts) {
 
 function processAmi(amiId, accts) {
   pq.add(() => amis.fetchLaunchPermissions(amiId)).then(
-    function(launchPermissions) {
+    function (launchPermissions) {
       const targetLaunchPermissions = amis.buildLaunchPermission(
         amiId,
         launchPermissions,
@@ -96,7 +96,7 @@ function processAmi(amiId, accts) {
           targetLaunchPermissions
         );
         setLaunchPermissionsPromise.then(
-          function(result) {
+          function (result) {
             log.info(
               "Set " +
                 amiId +
@@ -105,7 +105,7 @@ function processAmi(amiId, accts) {
                 "\n"
             );
           },
-          function(err) {
+          function (err) {
             log.error("setLaunchPermissions Error:\n" + err);
           }
         );
@@ -117,7 +117,7 @@ function processAmi(amiId, accts) {
         );
       }
     },
-    function(err) {
+    function (err) {
       log.error("fetchLaunchPermissions Error:\n" + err);
     }
   );
@@ -125,5 +125,5 @@ function processAmi(amiId, accts) {
 
 module.exports = {
   doIt: doIt,
-  setFlag: setFlag
+  setFlag: setFlag,
 };

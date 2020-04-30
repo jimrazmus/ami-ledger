@@ -23,10 +23,10 @@ test("fetchAmiIds returns one element array", async () => {
       {
         Name: "name",
         Values: [
-          "aws-elasticbeanstalk-amzn-2015.03.0.x86_64-tomcat8java8-hvm-201507300439"
-        ]
-      }
-    ]
+          "aws-elasticbeanstalk-amzn-2015.03.0.x86_64-tomcat8java8-hvm-201507300439",
+        ],
+      },
+    ],
   };
 
   const ids = await amis.fetchAmiIds(params);
@@ -42,10 +42,10 @@ test("fetchAmiIds returns multiple element array", async () => {
       {
         Name: "name",
         Values: [
-          "aws-elasticbeanstalk-amzn-2015.03.0.x86_64-tomcat8java8-hvm-*"
-        ]
-      }
-    ]
+          "aws-elasticbeanstalk-amzn-2015.03.0.x86_64-tomcat8java8-hvm-*",
+        ],
+      },
+    ],
   };
 
   const ids = await amis.fetchAmiIds(params);
@@ -56,7 +56,7 @@ test("fetchAmiIds returns multiple element array", async () => {
     "ami-51933f3a",
     "ami-643c220c",
     "ami-68969100",
-    "ami-ffa1d79a"
+    "ami-ffa1d79a",
   ]);
 });
 
@@ -68,9 +68,9 @@ test("fetchAmiIds returns empty array", async () => {
     Filters: [
       {
         Name: "name",
-        Values: ["aws-DOESNOTEXIST"]
-      }
-    ]
+        Values: ["aws-DOESNOTEXIST"],
+      },
+    ],
   };
 
   const ids = await amis.fetchAmiIds(params);
@@ -88,8 +88,8 @@ test("setLaunchPermissions returns true", async () => {
   const params = {
     ImageId: dummyAmiID,
     LaunchPermission: {
-      Add: [{ UserId: "123456789012" }, { UserId: "234567890123" }]
-    }
+      Add: [{ UserId: "123456789012" }, { UserId: "234567890123" }],
+    },
   };
   const setResult = await amis.setLaunchPermissions(params);
   expect(setResult).toEqual(true);
@@ -99,8 +99,8 @@ test("buildParams list1 list2", () => {
   expect(amis.buildLaunchPermission(dummyAmiID, list1, list2, ALL)).toEqual({
     ImageId: dummyAmiID,
     LaunchPermission: {
-      Add: [{ UserId: "123456789012" }, { UserId: "234567890123" }]
-    }
+      Add: [{ UserId: "123456789012" }, { UserId: "234567890123" }],
+    },
   });
 });
 
@@ -109,15 +109,15 @@ test("buildParams list2 list3", () => {
     ImageId: dummyAmiID,
     LaunchPermission: {
       Add: [{ UserId: "345678901234" }],
-      Remove: [{ UserId: "123456789012" }]
-    }
+      Remove: [{ UserId: "123456789012" }],
+    },
   });
 });
 
 test("buildParams list3 list4", () => {
   expect(amis.buildLaunchPermission(dummyAmiID, list3, list4, ALL)).toEqual({
     ImageId: dummyAmiID,
-    LaunchPermission: { Add: [{ UserId: "123456789012" }] }
+    LaunchPermission: { Add: [{ UserId: "123456789012" }] },
   });
 });
 
@@ -129,9 +129,9 @@ test("buildParams list4 list5", () => {
         { UserId: awsAcctId },
         { UserId: "123456789012" },
         { UserId: "234567890123" },
-        { UserId: "345678901234" }
-      ]
-    }
+        { UserId: "345678901234" },
+      ],
+    },
   });
 });
 
@@ -144,9 +144,9 @@ test("buildParams list4 list6", () => {
         { UserId: awsAcctId },
         { UserId: "123456789012" },
         { UserId: "234567890123" },
-        { UserId: "345678901234" }
-      ]
-    }
+        { UserId: "345678901234" },
+      ],
+    },
   });
 });
 
@@ -188,10 +188,10 @@ test("buildParams list6 list4", () => {
         { UserId: awsAcctId },
         { UserId: "123456789012" },
         { UserId: "234567890123" },
-        { UserId: "345678901234" }
+        { UserId: "345678901234" },
       ],
-      Remove: [{ UserId: "0" }]
-    }
+      Remove: [{ UserId: "0" }],
+    },
   });
 });
 
@@ -203,16 +203,16 @@ test("buildParams list5 list4", () => {
         { UserId: awsAcctId },
         { UserId: "123456789012" },
         { UserId: "234567890123" },
-        { UserId: "345678901234" }
-      ]
-    }
+        { UserId: "345678901234" },
+      ],
+    },
   });
 });
 
 test("buildParams list4 list3", () => {
   expect(amis.buildLaunchPermission(dummyAmiID, list4, list3, ALL)).toEqual({
     ImageId: dummyAmiID,
-    LaunchPermission: { Remove: [{ UserId: "123456789012" }] }
+    LaunchPermission: { Remove: [{ UserId: "123456789012" }] },
   });
 });
 
@@ -221,8 +221,8 @@ test("buildParams list3 list2", () => {
     ImageId: dummyAmiID,
     LaunchPermission: {
       Add: [{ UserId: "123456789012" }],
-      Remove: [{ UserId: "345678901234" }]
-    }
+      Remove: [{ UserId: "345678901234" }],
+    },
   });
 });
 
@@ -230,7 +230,7 @@ test("buildParams list2 list1", () => {
   expect(amis.buildLaunchPermission(dummyAmiID, list2, list1, ALL)).toEqual({
     ImageId: dummyAmiID,
     LaunchPermission: {
-      Remove: [{ UserId: "123456789012" }, { UserId: "234567890123" }]
-    }
+      Remove: [{ UserId: "123456789012" }, { UserId: "234567890123" }],
+    },
   });
 });

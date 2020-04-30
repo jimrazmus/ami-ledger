@@ -11,18 +11,18 @@ const describeImagesSchema = {
       items: {
         properties: {
           Name: { type: "string" },
-          Values: { items: { type: "string" }, minItems: 1, type: "array" }
+          Values: { items: { type: "string" }, minItems: 1, type: "array" },
         },
         required: ["Name", "Values"],
-        type: "object"
+        type: "object",
       },
       minItems: 1,
-      type: "array"
+      type: "array",
     },
     ImageIds: { items: { type: "string" }, minItems: 1, type: "array" },
-    Owners: { items: { type: "string" }, minItems: 1, type: "array" }
+    Owners: { items: { type: "string" }, minItems: 1, type: "array" },
   },
-  type: "object"
+  type: "object",
 };
 
 const describeImageAttributeSchema = {
@@ -31,10 +31,10 @@ const describeImageAttributeSchema = {
   properties: {
     Attribute: { type: "string" },
     DryRun: { type: "boolean" },
-    ImageId: { type: "string" }
+    ImageId: { type: "string" },
   },
   required: ["Attribute", "ImageId"],
-  type: "object"
+  type: "object",
 };
 
 const modifyImageAttributeSchema = {
@@ -45,10 +45,10 @@ const modifyImageAttributeSchema = {
       additionalProperties: false,
       properties: {
         Group: { type: "string" },
-        UserId: { type: "string" }
+        UserId: { type: "string" },
       },
-      type: "object"
-    }
+      type: "object",
+    },
   },
   minProperties: 2,
   properties: {
@@ -63,28 +63,28 @@ const modifyImageAttributeSchema = {
         Add: {
           items: { $ref: "#/definitions/targetSpec" },
           minItems: 1,
-          type: "array"
+          type: "array",
         },
         Remove: {
           items: { $ref: "#/definitions/targetSpec" },
           minItems: 1,
-          type: "array"
-        }
+          type: "array",
+        },
       },
-      type: "object"
+      type: "object",
     },
     OperationType: { type: "string" },
     ProductCodes: { items: { type: "string" }, minItems: 1, type: "array" },
     UserGroups: { items: { type: "string" }, minItems: 1, type: "array" },
     UserIds: { items: { type: "string" }, minItems: 1, type: "array" },
-    Value: { type: "string" }
+    Value: { type: "string" },
   },
   required: ["ImageId"],
-  type: "object"
+  type: "object",
 };
 
 module.exports = {
   describeImagesSchema,
   describeImageAttributeSchema,
-  modifyImageAttributeSchema
+  modifyImageAttributeSchema,
 };

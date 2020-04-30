@@ -32,5 +32,5 @@ module.exports = {
   isRemoveSet: isRemoveSet,
   isAllSet: isAllSet,
   ADD,
-  REMOVE
+  REMOVE,
 };

@@ -23,14 +23,14 @@ cmd
 cmd
   .command("auth")
   .description("Test authentication via STS getCallerIdentity")
-  .action(function() {
+  .action(function () {
     commandVal.confirmCreds(cmd.loglevel);
   });
 
 cmd
   .command("add")
   .description("Add missing account IDs to AMI permissions")
-  .action(function() {
+  .action(function () {
     main.setFlag(flags.ADD);
     main.doIt(cmd.loglevel);
   });
@@ -40,7 +40,7 @@ cmd
   .description(
     "Both add and remove, account IDs to exactly match configuration"
   )
-  .action(function() {
+  .action(function () {
     main.setFlag(flags.ADD | flags.REMOVE);
     main.doIt(cmd.loglevel);
   });
@@ -48,7 +48,7 @@ cmd
 cmd
   .command("remove")
   .description("Remove extra account IDs from AMI permissions")
-  .action(function() {
+  .action(function () {
     main.setFlag(flags.REMOVE);
     main.doIt(cmd.loglevel);
   });
@@ -56,7 +56,7 @@ cmd
 cmd
   .command("*")
   .description("Invalid commands print help")
-  .action(function() {
+  .action(function () {
     cmd.help();
   });
 

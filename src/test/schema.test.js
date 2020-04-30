@@ -86,7 +86,7 @@ test("describeImagesSchema Filters [ { Name: 'Sandwich', Values: [ 'Baloney' ] }
 
 test("describeImagesSchema Filters [ { Name: 'Sandwich', Values: [ 'Baloney', 'Salami' ] } ] is valid", () => {
   const input = {
-    Filters: [{ Name: "Sandwich", Values: ["Baloney", "Salami"] }]
+    Filters: [{ Name: "Sandwich", Values: ["Baloney", "Salami"] }],
   };
   expect(ajv.validate(schema.describeImagesSchema, input)).toEqual(true);
 });
@@ -156,7 +156,7 @@ test("modifyImageAttributeSchema ImageId and 1 property is valid", () => {
 test("modifyImageAttributeSchema single add is valid", () => {
   const input = {
     ImageId: "123",
-    LaunchPermission: { Add: [{ UserId: "234" }] }
+    LaunchPermission: { Add: [{ UserId: "234" }] },
   };
   expect(ajv.validate(schema.modifyImageAttributeSchema, input)).toEqual(true);
 });
@@ -164,7 +164,7 @@ test("modifyImageAttributeSchema single add is valid", () => {
 test("modifyImageAttributeSchema multiple add is valid", () => {
   const input = {
     ImageId: "123",
-    LaunchPermission: { Add: [{ UserId: "234" }, { UserId: "345" }] }
+    LaunchPermission: { Add: [{ UserId: "234" }, { UserId: "345" }] },
   };
   expect(ajv.validate(schema.modifyImageAttributeSchema, input)).toEqual(true);
 });
@@ -174,8 +174,8 @@ test("modifyImageAttributeSchema multiple add and remove is valid", () => {
     ImageId: "123",
     LaunchPermission: {
       Add: [{ UserId: "234" }, { UserId: "345" }],
-      Remove: [{ UserId: "678" }, { UserId: "789" }]
-    }
+      Remove: [{ UserId: "678" }, { UserId: "789" }],
+    },
   };
   expect(ajv.validate(schema.modifyImageAttributeSchema, input)).toEqual(true);
 });
@@ -187,8 +187,8 @@ test("modifyImageAttributeSchema complex example is valid", () => {
     ImageId: "123",
     LaunchPermission: {
       Add: [{ UserId: "234" }, { UserId: "345" }],
-      Remove: [{ UserId: "678" }, { UserId: "789" }]
-    }
+      Remove: [{ UserId: "678" }, { UserId: "789" }],
+    },
   };
   expect(ajv.validate(schema.modifyImageAttributeSchema, input)).toEqual(true);
 });
