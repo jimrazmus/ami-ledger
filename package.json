@@ -17,7 +17,7 @@
     "commander": "5.1.0",
     "dotenv": "8.2.0",
     "loglevel": "1.6.8",
-    "p-queue": "6.4.0"
+    "p-queue": "6.6.2"
   },
   "description": "Manage AMI launch permissions",
   "devDependencies": {
