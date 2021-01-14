@@ -58,19 +58,59 @@ jobs:
       - *putcache
       - run:
           name: Jest testing
-          command: npm run test
+          command: |
+            TEST_AMI_ID=$(cat /tmp/json/ami-id.txt)
+            npm run test
       - store_test_results:
           path: reports/jest
       - run:
           name: Upload to CodeCov.io
           command: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+      - attach_workspace:
+          at: /tmp/workspace
 
-  test_init:
+  test_create:
     docker:
       - image: jimrazmus/awscli
     steps:
-      - run: aws ec2 reset-image-attribute --image-id $DUMMY_AMI_ID --attribute launchPermission
-      - run: aws ec2 modify-image-attribute --image-id $DUMMY_AMI_ID --launch-permission "Add=[{UserId=$AWS_ACCT_ID}]"
+      - attach_workspace:
+          at: ~/ami-access-manager
+      - run:
+          name: Wait for Image Availability
+          command: |
+            mkdir -p /tmp/json
+            aws ec2 copy-image --source-image-id $DUMMY_AMI_ID --source-region us-east-1 --region us-east-1 --name $CIRCLE_WORKFLOW_JOB_ID | jq -r '.ImageId' > /tmp/json/ami-id.txt
+            AMI=$(cat /tmp/json/ami-id.txt)
+            aws ec2 wait image-available --image-ids $AMI
+      - run:
+          name: Initialize Image Permissions
+          command: |
+            AMI=$(cat /tmp/json/ami-id.txt)
+            aws ec2 reset-image-attribute --image-id $AMI --attribute launchPermission
+            aws ec2 modify-image-attribute --image-id $AMI --launch-permission "Add=[{UserId=$AWS_ACCT_ID}]"
+            aws ec2 describe-images --image-ids ${AMI} | jq —r '.Images[0].BlockDeviceMappings[0].Ebs.SnapshotId' > /tmp/json/snapshot.txt
+            cat /tmp/json/snapshot.txt
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - json
+
+  test_destroy:
+    docker:
+      - image: jimrazmus/awscli
+    steps:
+      - attach_workspace:
+          at: ~/ami-access-manager
+      - run:
+          name: Deregister Image
+          command: |
+            AMI=$(cat /tmp/json/ami-id.txt)
+            aws ec2 deregister-image --image-id $AMI
+      - run:
+          name: Delete Snapshot
+          command: |
+            SNAP=$(cat /tmp/json/snapshot.txt)
+            aws ec2 delete-snapshot --snapshot-id $SNAP
 
 workflows:
   version: 2
@@ -78,7 +118,7 @@ workflows:
     jobs:
       - lint
       - prettier
-      - test_init:
+      - test_create:
           context: aws-dev
           requires:
             - lint
@@ -86,4 +126,8 @@ workflows:
       - test:
           context: aws-dev
           requires:
-            - test_init
+            - test_create
+      - test_destroy:
+          context: aws-dev
+          requires:
+            - test
